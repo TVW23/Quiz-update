@@ -1,7 +1,7 @@
 /*
 * Author: Hesselst
 * Github: https://github.com/Hesselst
-* Description: This class contains all the functions for the point
+* Description: This class contains all the functions for the streak system, which will be used in each quiz
 *
 *
 *    o    |~~~|

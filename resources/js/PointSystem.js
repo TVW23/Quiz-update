@@ -1,7 +1,7 @@
 /*
 * Author: Hesselst
 * Github: https://github.com/Hesselst
-* Description: This class contains all the functions for the point system that will be used in each quiz
+* Description: This class contains all the functions for the point system, which will be used in each quiz
 *
 *
 *    o    |~~~|
@@ -18,9 +18,11 @@ class PointSystem {
         this.totalPoints = 0;
         this.MIN_POINTS = 500;
         this.MAX_POINTS = 1000;
-        this.TIME_INCREMENT = 1;
-        // Wait time in miliseconds for the timer
+        this.TIME_INCREMENT = 1;     // Wait time in miliseconds for the timer
         this.WAIT_TIME = 1000;
+        this.PENALTY_RATE = 10;      // points per unit of elapsed time
+        this.DIVISOR = 3;            // divisor for scaling
+        this.MULTIPLIER = 10;        // multiplier for final scaling
     }
 
     async startTimer() {
@@ -42,8 +44,6 @@ class PointSystem {
     resetTimer() {
         // Set the elapsed time to the start time
         this.elapsedTime = this.startTime;
-
-        this.running = false;
     }
 
     getCurrentTime() {
@@ -52,7 +52,7 @@ class PointSystem {
 
     getCurrentPoints() {
         // calculate the minus points
-        var minusPoints = this.elapsedTime * 10 / 3 * 10;
+        var minusPoints = (this.elapsedTime * PENALTY_RATE / DIVISOR) * MULTIPLIER;
 
         var curPoints = this.MAX_POINTS = minusPoints;
 
