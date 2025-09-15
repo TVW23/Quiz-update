@@ -45,7 +45,9 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                <a href="{{ route('login') }}">
+                    {{ __('Register') }}
+                </a>
             </x-primary-button>
         </div>
     </form>
