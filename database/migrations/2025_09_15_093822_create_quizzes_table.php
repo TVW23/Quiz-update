@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quizzes', function (Blueprint $table) {
-            $table->id('quiz_id');
+            $table->id();
             $table->string('quiz_name');
             $table->timestamps();
         });
 
         Schema::create('questions', function (Blueprint $table){
-            $table->id('question_id');
+            $table->id();
+            $table->integer('quiz_id');
             $table->string('question');
             $table->string('answer');
             $table->timestamps();
+
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
         });
     }
 
