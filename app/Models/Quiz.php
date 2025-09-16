@@ -1,15 +1,15 @@
 <?php
 
-// namespace App\Models;
+namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-// class Quiz extends Model
-// {
-//     protected $table = 'quizzes';
-//     protected $fillable = ['quiz_name']
+class Quiz extends Model
+{
+    protected $table = 'quizzes';
+    protected $fillable = ['quiz_name'];
 
-//     public function questions (){
-//         return $this->hasMany(Question::class);
-//     }
-// }
+    public function question (){
+        return $this->hasMany(Question::class, 'quiz_id');
+    }
+}
