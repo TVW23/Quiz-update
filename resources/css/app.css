@@ -23,14 +23,7 @@
     align-items: center; /* centers horizontally */
     justify-content: center; /* centers vertically */
 }
-.inputlabel {
-    width: 300px;
-    font-size: 16px;
-    color: black;
-    margin-bottom: 8px;
-}
 .logo {
-    margin-top: 80px;
     margin-bottom: 50px;
     width: 150px;
     height: 150px;

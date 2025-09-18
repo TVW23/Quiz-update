@@ -13,13 +13,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+    @props(['image_buttonColor' => '#39B9EC'])
     <body>
-        <div>
+        <div class="h-screen overflow-hidden flex flex-col items-center justify-center">
             <div>
                 <a href="/">
-                    <div class="container">
-                        <div class="logo">
-                            <x-consortium class="w-[120px] h-[120px] rounded-[10%]" />
+                    <div class="container flex">
+                        <div class="mb-[50px] w-[150px] h-[150px] rounded-[10%] flex items-center justify-center overflow-hidden"
+                            style="background-color: {{ $image_buttonColor ?? '#39B9EC' }};">
+                            <x-consortium class="flex w-[120px] h-[120px] rounded-[10%]" />
                         </div>
                     </div>
                 </a>
