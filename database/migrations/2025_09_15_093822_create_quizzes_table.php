@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('subcategory');
-            $table->uuid("folder_guid");
+            $table->uuid("folder_guid")->unique();
             $table->timestamps();
         });
     }
