@@ -13,18 +13,10 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->string('quiz_name');
+            $table->string('name');
+            $table->string('subcategory');
+            $table->uuid("folder_guid")->unique();
             $table->timestamps();
-        });
-
-        Schema::create('questions', function (Blueprint $table){
-            $table->id();
-            $table->integer('quiz_id');
-            $table->string('question');
-            $table->string('answer');
-            $table->timestamps();
-
-            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
         });
     }
 
@@ -34,6 +26,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('quizzes');
-        Schema::dropIfExists('questions');
     }
 };
