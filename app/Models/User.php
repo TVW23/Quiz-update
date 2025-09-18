@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function quizPoints() {
+        return $this->hasMany(UserQuizPoints::class, 'user_id');
+    }
 }

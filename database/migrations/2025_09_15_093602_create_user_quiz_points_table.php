@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_quiz_points', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
-            $table->integer("quiz_id");
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->integer("points");
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
         }); 
     }
 

@@ -15,4 +15,10 @@ class QuizzesController extends Controller
         $quizzes = Quiz::with('question.answer')->get();
         return $quizzes;
     }
+
+    public function getQuiz($id)
+    {
+        $quiz = Quiz::with('question.answer')->find($id);
+        return $quiz;
+    }
 }
