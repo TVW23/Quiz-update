@@ -7,12 +7,10 @@ use \App\Models\UserQuizPoints;
 
 class UserQuizPointsController extends Controller
 {
-    public function getUserQuizPoints($userId)
+    public function getUserQuizPoints(int $userId)
     {
-        $userQuizPoints = UserQuizPoints::with('quiz')
-            ->where('user_id', $userId)
-            ->get();
-
+        $userQuizPoints = UserQuizPoints::where('user_id', $userId)->get();
+        
         return $userQuizPoints;
     }
 }
