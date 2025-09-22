@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="stylesheet" href="/public/css/app.css">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
 
@@ -15,20 +17,22 @@
     </head>
     @props(['image_buttonColor' => '#39B9EC'])
     <body>
-        <div class="h-screen overflow-hidden flex flex-col items-center justify-center">
-            <div>
-                <a href="/">
-                    <div class="container flex">
-                        <div class="mb-[50px] w-[150px] h-[150px] rounded-[10%] flex items-center justify-center overflow-hidden"
-                            style="background-color: {{ $image_buttonColor ?? '#39B9EC' }};">
-                            <x-consortium class="flex w-[120px] h-[120px] rounded-[10%]" />
+        <div class="flex flex-col">
+            <div class="flex flex-col justify-center h-screen overflow-hidden">
+                <div class="flex justify-center items-center">
+                    <a href="/">
+                        <div class="flex">
+                            <div class="mb-[50px] w-[150px] h-[150px] rounded-[10%] flex items-center justify-center overflow-hidden"
+                                style="background-color: {{ $image_buttonColor ?? '#39B9EC' }};">
+                                <x-consortium class="flex w-[120px] h-[120px] rounded-[10%]" />
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
 
-            <div>
-                {{ $slot }}
+                <div class="flex flex-col items-center">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
     </body>

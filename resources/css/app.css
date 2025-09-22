@@ -1,9 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind flexboxgrid;
 
-.inputfield {
+.button-layout {
+  @apply w-full rounded-lg py-3 transition-colors duration-200;
+}
+
+/* .inputfield {
     width: 350px;
     height: 70px;
     border: 1px solid #ccc;
@@ -12,16 +15,16 @@
     font-size: 16px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centers horizontally */
-    justify-content: center; /* centers vertically */
+    align-items: center; 
+    justify-content: center; 
     border-color: black;
     font-size: 50px;
 }
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centers horizontally */
-    justify-content: center; /* centers vertically */
+    align-items: center;
+    justify-content: center;
 }
 .logo {
     margin-bottom: 50px;
@@ -33,4 +36,4 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-}
+} */
