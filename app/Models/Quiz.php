@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     protected $table = 'quizzes';
-    protected $fillable = ['quiz_name'];
+    protected $fillable = ['name', 'subcategory', 'folder_guid'];
 
     public function question (){
         return $this->hasMany(Question::class, 'quiz_id');
