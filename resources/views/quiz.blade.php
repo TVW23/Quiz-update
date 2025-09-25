@@ -19,11 +19,21 @@
         <p class="mb-5 text-center text-2xl font-bold">{{ $question->question }}</p>
 
         <div class="grid grid-cols-2 gap-4 text-white font-bold">
-          @foreach($question->answers as $answer)
+          @foreach($question->answers as $aIndex => $answer)
             <div>
+              @php
+                // 0: top left, 1: top right, 2: bottom left, 3: bottom right
+                $colorClass = '';
+                switch($aIndex) {
+                  case 0: $colorClass = 'bg-red-500 text-white hover:bg-red-600'; break; // top left
+                  case 1: $colorClass = 'bg-green-500 text-white hover:bg-green-600'; break; // top right
+                  case 2: $colorClass = 'bg-blue-500 text-white hover:bg-blue-600'; break; // bottom left
+                  case 3: $colorClass = 'bg-yellow-400 text-black hover:bg-yellow-500'; break; // bottom right
+                }
+              @endphp
               <button
                 onclick="getQuizAnswer(this)"
-                class="button-layout bg-blue-500 hover:bg-blue-700"
+                class="button-layout {{ $colorClass }}"
                 data-answer-id="{{ $answer->id }}"
                 data-correct="{{ $answer->is_correct }}"
               >
@@ -35,21 +45,25 @@
 
         <div class="text-center mt-6">
           <p class="mb-4 text-lg font-semibold" style="display:none" id="feedback-{{ $index }}"></p>
-          <button
-            onclick="checkAnswer({{ $index }})"
-            class="px-6 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700"
-            id="check-btn-{{ $index }}"
-          >
-            Nakijken &raquo;
-          </button>
-          <button
-            onclick="nextQuestion({{ $index }})"
-            class="px-6 py-2 bg-green-600 text-white rounded-xl shadow hover:bg-green-700 mt-2"
-            id="next-btn-{{ $index }}"
-            style="display:none"
-          >
-            Volgende vraag &raquo;
-          </button>
+            <div class="flex justify-end">
+            <button
+              onclick="checkAnswer({{ $index }})"
+              class="px-6 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700"
+              id="check-btn-{{ $index }}"
+            >
+              Nakijken &raquo;
+            </button>
+            </div>
+            <div class="flex justify-end">
+            <button
+              onclick="nextQuestion({{ $index }})"
+              class="px-6 py-2 bg-green-600 text-white rounded-xl shadow hover:bg-green-700 mt-2"
+              id="next-btn-{{ $index }}"
+              style="display:none"
+            >
+              Volgende vraag &raquo;
+            </button>
+            </div>
         </div>
       </div>
     @endforeach
