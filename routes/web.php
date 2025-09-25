@@ -20,7 +20,7 @@ Route::get('/leaderboard', function () {
 // Route naar Mockup
 Route::get('/overzicht', function () {
     return view('overzicht');
-})->name('overzicht');
+})->middleware(['auth', 'verified'])->name('overzicht');
 
 Route::get('/quiz', function () {
     return view('quiz');
