@@ -9,9 +9,9 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="bg-blue-600 p-4 text-white">
+    <header class="bg-[#39B9EC] p-4 text-white">
       <div class="mx-auto flex max-w-6xl items-center justify-between">
-        <h1 class="text-lg font-bold">My Website</h1>
+        <img class="w-[50px] h-[50px] rounded-[10%]" src="{{ asset('images/consortium_logo.jpg') }}" alt="Logo" />
         <nav class="space-x-4">
           <a href="#" class="hover:underline">Home</a>
           <a href="#" class="hover:underline">About</a>
@@ -25,7 +25,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#32a4d1] hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -64,11 +64,11 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    <h2 class="text-lg font-medium text-gray-100">
                         {{ __('Are you sure you want to delete your account?') }}
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-gray-600">
                         {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
                     </p>
 
@@ -108,29 +108,43 @@
     </header>
     <div class="mx-auto max-w-4xl p-10">
       <div class="grid grid-cols-1 gap-5 p-30 sm:grid-cols-2 md:grid-cols-3">
-        <div class="c w-full rounded-md bg-gray-400">
-          <img class="w-full rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+        <div class="c w-full rounded-md bg-[#F2B300]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
           <div class="space-y-5 px-4 pt-5 pb-10">
             <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
             <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
           </div>
         </div>
-        <div class="c w-full rounded-md bg-gray-400">
-          <img class="w-full rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+        <div class="c w-full rounded-md bg-[#CCD626]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
           <div class="space-y-5 px-4 pt-5 pb-10">
             <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
             <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
           </div>
         </div>
-        <div class="c w-full rounded-md bg-gray-400">
-          <img class="w-full rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+        <div class="c w-full rounded-md bg-[#E72B76]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
           <div class="space-y-5 px-4 pt-5 pb-10">
             <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
             <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
           </div>
         </div>
-        <div class="c w-full rounded-md bg-gray-400">
-          <img class="w-full rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+        <div class="c w-full rounded-md bg-[#39B9EC]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+          <div class="space-y-5 px-4 pt-5 pb-10">
+            <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
+            <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
+          </div>
+        </div>
+        <div class="c w-full rounded-md bg-[#F2B300]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
+          <div class="space-y-5 px-4 pt-5 pb-10">
+            <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
+            <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
+          </div>
+        </div>
+        <div class="c w-full rounded-md bg-[#CCD626]">
+          <img class="w-full rounded-br-[20%] rounded-md" src="https://tse2.mm.bing.net/th/id/OIP.uoX2AmMdsM3cON2eNjG05gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" />
           <div class="space-y-5 px-4 pt-5 pb-10">
             <h3 class="text-2xl font-bold text-white">Titel quiz</h3>
             <h4 class="text-md font-bold text-white">Sub-onderwerp</h4>
