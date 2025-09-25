@@ -1,3 +1,3 @@
 @props(['disabled' => false])
-
-<input @disabled($disabled) {{ $attributes->merge(['class' => 'flex w-[350px] h-[60px] rounded-[15px]']) }}>
+<!-- Invoer veld component -->
+<input @disabled($disabled) {{ $attributes->merge(['class' => 'w-full h-[60px] rounded-[15px]']) }}>
