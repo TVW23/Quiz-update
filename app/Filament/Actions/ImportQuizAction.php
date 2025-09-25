@@ -47,8 +47,18 @@ class ImportQuizAction extends Action
                 }
 
                 $filePath = $file->getRealPath();
-                $importer = new QuizImport();
-                Excel::import($importer, $filePath);
+                try {
+                    $importer = new QuizImport();
+                    Excel::import($importer, $filePath);
+                } catch (\Exception $e) {
+                    dd($e);
+                    Notification::make()
+                        ->title('Import Failed')
+                        ->body($e->getMessage())
+                        ->danger()
+                        ->send();
+                    return;
+                }
 
                 $file->delete();
 
