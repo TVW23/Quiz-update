@@ -30,4 +30,22 @@ class QuizController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function getQuizQuestion()
+    {
+        // Dummy data for now
+        $question = "What is the capital of France?";
+        
+        $answers = [
+            "Paris",
+            "London",
+            "Berlin",
+            "Madrid"
+        ];
+
+        return response()->json([
+            'question' => $question,
+            'answers' => $answers
+        ]);
+    }
 }
