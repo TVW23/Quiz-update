@@ -8,11 +8,11 @@ use App\Models\Quiz;
 
 class QuizzesController extends Controller
 {
-    public function GetQuizzes()
+    public function getQuizzes()
     {
         $quizzes = Quiz::all();
-        return $quizzes;
-    }
+        return view('overzicht', compact('quizzes'));
+    }   
 
     public function getQuizzesData()
     {
