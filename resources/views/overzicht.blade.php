@@ -16,6 +16,9 @@
           <a href="#" class="hover:underline">Home</a>
           <a href="#" class="hover:underline">About</a>
           <a href="#" class="hover:underline">Contact</a>
+          @if (Auth::check() && Auth::user()->isAdmin())
+            <a href="/admin" class="hover:underline">Admin</a>
+          @endif
         </nav>
 
             <!-- Settings Dropdown -->
