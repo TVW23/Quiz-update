@@ -21,20 +21,39 @@ class Quiz {
         this.streaks = new Streaks();
         this.answeredCorrectly = false;
         this.currentAnswerSelected = null;
+        this.quizRunning = false;
     }
 
     // This gets executed from the onClick() function on one of the answer buttons [ onclick="getQuizAnswer(this)" ]
     getQuizAnswer(button) {
+        if (!button) {
+            this.currentAnswerSelected = null;
+            console.log("getQuizAnswer: Button is null")
+            return;
+        }
         this.currentAnswerSelected = button.innerText;
     }
 
     startQuiz() {
+        // Dummy number
+        var totalQuestionsLeft = 10;
+
         // Set up the quiz loop
+        while (totalQuestionsLeft > 0) {
+            this.updateQuestion();
+            totalQuestionsLeft--;
+        }
     }
+
+    updateQuestion() {
+
+    }
+
     // This gets executed from the onClick() function on one of the submit button
     submitAnswer() {
         if (this.currentAnswerSelected === null) {
-            return "Please select an answer!";
+            console.log("submitAnswer: currentAnswerSelected is null")
+            return;
         }
 
         this.answeredCorrectly = this.getQuizAnswerResult();
@@ -55,7 +74,7 @@ class Quiz {
     getQuizAnswerResult() {
         var data = null;
 
-        fetch("../app/Http/Controllers/Api/checkQuizAnswer.php", {
+        fetch("/api/check-quiz-answer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -92,13 +111,12 @@ class Quiz {
     // Execute this function if all questions have been answered
     sendQuizResults() {
         // Send the points to the desired php file, so the points can be stored into the db
-        fetch("../app/Http/Controllers/Api/quizEnd.php", {
+        fetch("/api/quiz-end", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body: new URLSearchParams({
-                quizEnded: "true",
                 points: this.pointSystem.totalPoints
             })
         });
