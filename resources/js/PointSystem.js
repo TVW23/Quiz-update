@@ -83,4 +83,8 @@ class PointSystem {
     getTotalPoints() {
         return Number(this.totalPoints);
     }
+
+    resetTotalPoints() {
+        this.totalPoints = 0;
+    }
 }
