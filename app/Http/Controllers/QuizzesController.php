@@ -8,7 +8,13 @@ use App\Models\Quiz;
 
 class QuizzesController extends Controller
 {
-    public function getQuizzes()
+    public function GetQuizzes()
+    {
+        $quizzes = Quiz::all();
+        return $quizzes;
+    }
+
+    public function getQuizzesData()
     {
         $quizzes = Quiz::with('question.answer')->get();
         return $quizzes;
