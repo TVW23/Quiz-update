@@ -10,6 +10,9 @@
 *   ][ \,/|___|
 */
 
+import './PointSystem';
+import './Streaks';
+
 class Quiz {
 
     static CONFIG = {
@@ -35,8 +38,9 @@ class Quiz {
     }
 
     startQuiz() {
-        // Dummy number
-        var totalQuestionsLeft = 10;
+        var questions;
+        var totalQuestionsLeft = this.getTotalAmountOfQuestions(questions);
+        var currentQuestion = 1;
 
         // Set up the quiz loop
         while (totalQuestionsLeft > 0) {
@@ -45,8 +49,33 @@ class Quiz {
         }
     }
 
-    updateQuestion() {
+    getTotalAmountOfQuestions(questionsStructure) {
 
+    }
+
+    updateQuestion() {
+        fetch("/quiz/api/get-quiz-question", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response:", data);
+
+            this.updateQuestionUi(data.question);
+
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+
+    updateQuestionUi(question) {
+        // Update the question text
+
+        // Update answer buttons
     }
 
     // This gets executed from the onClick() function on one of the submit button
@@ -74,7 +103,7 @@ class Quiz {
     getQuizAnswerResult() {
         var data = null;
 
-        fetch("/api/check-quiz-answer", {
+        fetch("/quiz/api/check-quiz-answer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -111,7 +140,7 @@ class Quiz {
     // Execute this function if all questions have been answered
     sendQuizResults() {
         // Send the points to the desired php file, so the points can be stored into the db
-        fetch("/api/quiz-end", {
+        fetch("/quiz/api/quiz-end", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -126,3 +155,35 @@ class Quiz {
         this.pointSystem.resetTotalPoints();
     }
 }
+
+let quizInstance = new Quiz();
+
+// Database structure:
+
+// all: [quiz {
+//  questions: all: [
+//      question{ 
+//          answers: all: [
+//               answer {} ] 
+//          } 
+//      ] 
+//  } 
+// ]
+
+// {
+//   "id": 1,
+//   "name": "Math Quiz",
+//   "questions": [
+//     {
+//       "id": 1,
+//       "question_text": "What is 2+2?",
+//       "answers": [
+//         { "id": 1, "choice": "3", "is_correct": false },
+//         { "id": 2, "choice": "4", "is_correct": true }
+//       ]
+//     }
+//   ]
+// },
+// {
+//  Volgende quiz...
+// }
