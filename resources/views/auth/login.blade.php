@@ -6,20 +6,23 @@
             @csrf
             <div>
                 <div>
-                    <!-- Email Address -->
+                    <div class="flex justify-center w-full max-w-[400px] mb-5">
+                        <x-input-error :messages="$errors->get('login')" class="mb-4" />
+                    </div>
+                    <!-- Email Addres -->
                     <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
                         <x-text-input id="email" type="email" placeholder="Email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                        <x-input-error :messages="$errors->get('email')" class=" mt-2" />
+                        <br /><x-input-error :messages="$errors->get('email')" class=" mt-2" />
                     </div>
 
-                    <!-- Password -->
+                    <!-- Wachtwoord -->
                     <div class="flex justify-center w-full max-w-[400px] px-10">
-                        <x-text-input id="password" placeholder="Password" type="password" name="password" required autocomplete="current-password" />
+                        <x-text-input id="password" placeholder="Wachtwoord" type="password" name="password" required autocomplete="current-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
                     </div>
 
-                    <!-- Remember Me -->
+                    <!-- Onthoudt mij -->
                     <div class="block mt-5 justify-self-center">
                         <label for="remember_me" class="inline-flex items-center">
                             <input id="remember_me" type="checkbox" class=" rounded"  name="remember">
@@ -27,12 +30,14 @@
                         </label>
                     </div>
 
+                    <!-- Inloggen knop -->
                     <div class="flex justify-center w-full max-w-[400px] px-10">
                         <x-primary-button :image_buttonColor="'#39B9EC'">
                             {{ __('Inloggen') }}
                         </x-primary-button>
                     </div>
 
+                    <!-- Deze code hieronder die in comments staat is een knop om naar de pagina wachtwoord vergeten te gaan -->
                     <!-- <div class="flex items-center justify-end mt-4">
                         @if (Route::has('password.request'))
                             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
@@ -41,6 +46,7 @@
                         @endif
                     </div> -->
 
+                    <!-- Heb je nog geen account knop -->
                     <div class="flex items-center justify-center mt-4">
                         @if (Route::has('register'))
                             <a class=" text-sm text-gray-400 rounded-md" href="{{ route('register') }}">
