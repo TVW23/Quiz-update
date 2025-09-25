@@ -4,20 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizzesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('overzicht');
-})->middleware(['auth', 'verified'])->name('overzicht');
+Route::get('/', [QuizzesController::class ,'getQuizzes'])
+    ->middleware(['auth', 'verified'])->name('overzicht');
 
 Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
 
-// Route naar Mockup
-Route::get('/overzicht', function () {
-    return view('overzicht');
-})->middleware(['auth', 'verified'])->name('overzicht');
-
-Route::get('/quiz/{id}',[ QuizzesController::class ,'GetQuiz'])->name('quiz');
+Route::get('/quiz/{id}',[QuizzesController::class ,'getQuiz'])->name('quiz');
 
 Route::get('/tussenscherm', function () {
     return view('tussenscherm');
