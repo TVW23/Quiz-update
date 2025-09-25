@@ -96,6 +96,10 @@ class Quiz {
         return data;
     }
 
+    testingQuiz() {
+        console.log("Dit is een test");
+    }
+
     updateTotalPointsMeter() {
         /*
         TODO: 
