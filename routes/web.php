@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizzesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,9 +17,7 @@ Route::get('/overzicht', function () {
     return view('overzicht');
 })->middleware(['auth', 'verified'])->name('overzicht');
 
-Route::get('/quiz', function () {
-    return view('quiz');
-})->name('quiz');
+Route::get('/quiz/{id}',[ QuizzesController::class ,'GetQuiz'])->name('quiz');
 
 Route::get('/tussenscherm', function () {
     return view('tussenscherm');

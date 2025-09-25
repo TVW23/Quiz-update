@@ -23,6 +23,6 @@ class QuizzesController extends Controller
     public function getQuiz($id)
     {
         $quiz = Quiz::with('question.answer')->find($id);
-        return $quiz;
+        return view('quiz', compact('quiz'));
     }
 }
