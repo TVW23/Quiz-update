@@ -2,6 +2,8 @@
 
 namespace App\Filament\Admin\Resources\Quizzes\Tables;
 
+use App\Filament\Actions\ImportQuizAction;
+use App\Models\Quiz;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -32,6 +34,9 @@ class QuizzesTable
             ])
             ->recordActions([
                 EditAction::make(),
+            ])
+            ->headerActions([
+                ImportQuizAction::make('import_quizzes'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
