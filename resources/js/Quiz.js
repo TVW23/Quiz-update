@@ -38,14 +38,19 @@ class Quiz {
     }
 
     startQuiz() {
-        // Dummy number
-        var totalQuestionsLeft = 10;
+        var questions;
+        var totalQuestionsLeft = this.getTotalAmountOfQuestions(questions);
+        var currentQuestion = 1;
 
         // Set up the quiz loop
         while (totalQuestionsLeft > 0) {
             this.updateQuestion();
             totalQuestionsLeft--;
         }
+    }
+
+    getTotalAmountOfQuestions(questionsStructure) {
+
     }
 
     updateQuestion() {
@@ -150,3 +155,35 @@ class Quiz {
         this.pointSystem.resetTotalPoints();
     }
 }
+
+let quizInstance = new Quiz();
+
+// Database structure:
+
+// all: [quiz {
+//  questions: all: [
+//      question{ 
+//          answers: all: [
+//               answer {} ] 
+//          } 
+//      ] 
+//  } 
+// ]
+
+// {
+//   "id": 1,
+//   "name": "Math Quiz",
+//   "questions": [
+//     {
+//       "id": 1,
+//       "question_text": "What is 2+2?",
+//       "answers": [
+//         { "id": 1, "choice": "3", "is_correct": false },
+//         { "id": 2, "choice": "4", "is_correct": true }
+//       ]
+//     }
+//   ]
+// },
+// {
+//  Volgende quiz...
+// }

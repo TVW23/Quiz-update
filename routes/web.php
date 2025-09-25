@@ -7,12 +7,6 @@ Route::get('/', function () {
     return view('overzicht');
 })->middleware(['auth', 'verified'])->name('overzicht');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route naar leaderboard
-
 Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
