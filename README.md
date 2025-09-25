@@ -1,9 +1,12 @@
 # Quiz-Update
 
 ## Inhoud
+* Over dit project
 * Installatie
+* Credits
 
-
+## Over dit project
+(Moet nog ingevuld worden)
 ## Installatie
 ### Vereisten:
 *Hier staan de vereisten die je nodig hebt voor het installeren van onze webapplicatie.* 
@@ -27,3 +30,10 @@ php artisan migrate
 npm run build
 ```
 Als al deze stappen correct zijn gevolgd, zou de webapplicatie volledig moeten werken.
+
+## Credits
+Dit project is gemaakt door: 
+- Merijn
+- Julian
+- Thijs
+- Hessel
