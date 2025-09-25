@@ -54,20 +54,20 @@
       <p class="mb-5 text-center text-2xl font-bold">What is the capital of France?</p>
       <div class="grid grid-cols-1 gap-4 text-center font-bold text-white sm:grid-cols-2">
         <div>
-          <button class="button-layout bg-red-500 hover:bg-red-700">Berlin</button>
+          <button onclick="getQuizAnswer(this)" class="button-layout bg-red-500 hover:bg-red-700">Berlin</button>
         </div>
         <div>
-          <button class="button-layout bg-green-500 hover:bg-green-700">Madrid</button>
+          <button onclick="getQuizAnswer(this)" class="button-layout bg-green-500 hover:bg-green-700">Madrid</button>
         </div>
         <div>
-          <button class="button-layout bg-blue-500 hover:bg-blue-700">Paris</button>
+          <button onclick="getQuizAnswer(this)" class="button-layout bg-blue-500 hover:bg-blue-700">Paris</button>
         </div>
         <div>
-          <button class="button-layout bg-yellow-500 hover:bg-yellow-700">Rome</button>
+          <button onclick="getQuizAnswer(this)" class="button-layout bg-yellow-500 hover:bg-yellow-700">Rome</button>
         </div>
       </div>
       <div class="mx-auto w-full">
-        <button class="float-right  mt-5 rounded-2xl bg-blue-400 transition-colors duration-200 hover:bg-blue-600 px-4 py-2 font-bold text-white">Nakijken</button>
+        <button onclick="submitAnswer()"class="float-right  mt-5 rounded-2xl bg-blue-400 transition-colors duration-200 hover:bg-blue-600 px-4 py-2 font-bold text-white">Nakijken</button>
       </div>
     </div>
   </body>
