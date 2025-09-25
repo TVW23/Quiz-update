@@ -11,9 +11,25 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route naar leaderboard
+
 Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
+
+// Route naar Mockup
+Route::get('/overzicht', function () {
+    return view('overzicht');
+})->name('overzicht');
+
+Route::get('/quiz', function () {
+    return view('quiz');
+})->name('quiz');
+
+Route::get('/tussenscherm', function () {
+    return view('tussenscherm');
+})->name('tussenscherm');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
