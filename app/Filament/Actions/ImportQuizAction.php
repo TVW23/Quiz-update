@@ -10,26 +10,28 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ImportQuizAction extends Action
 {
+    protected int $fileSize = 51200;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this
-            ->name('import_quizzes') // Matches QuizzesTable.php
+            ->name('import_quizzes')
             ->label('Import Quizzes from Excel')
             ->color('success')
             ->icon('heroicon-m-arrow-up-tray')
-            ->form([
+            ->schema([
                 FileUpload::make('excel_file')
                     ->label('Upload Excel File')
                     ->acceptedFileTypes([
-                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
-                        'application/vnd.ms-excel', // .xls
-                        'text/csv', // .csv
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                        'application/vnd.ms-excel',
+                        'text/csv',
                     ])
                     ->required()
-                    ->maxSize(51200) // 50MB max
-                    ->storeFiles(false) // Keep temporary
+                    ->maxSize($this->fileSize)
+                    ->storeFiles(false)
                     ->directory('excel-imports'),
             ])
             ->action(function (array $data): void {

@@ -11,8 +11,11 @@ class QuizForm
     {
         return $schema
             ->components([
-                TextInput::make('quiz_name')
+                TextInput::make('name')
                     ->required(),
+                TextInput::make('subcategory')
+                    ->required(),
+                TextInput::make('folder_guid'),
             ]);
     }
 }

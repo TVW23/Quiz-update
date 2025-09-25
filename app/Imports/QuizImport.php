@@ -3,10 +3,8 @@
 namespace App\Imports;
 
 use App\Models\Quiz;
-use App\Models\Question;
-use App\Models\Answer;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str; // For UUID
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
@@ -16,6 +14,8 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
 {
     protected $errors = [];
     protected $successCount = 0;
+    protected $questionMax = 5;
+    protected $answersMax = 4;
 
     public function collection(Collection $rows)
     {
@@ -27,22 +27,22 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
                     'folder_guid' => $row['folder_guid'] ?? Str::uuid()->toString(), 
                 ]);
 
-                for ($q = 1; $q <= 5; $q++) {
-                    $questionText = $row["question_{$q}"] ?? null; 
+                for ($question = 1; $question <= $this->questionMax; $question++) {
+                    $questionText = $row["question_{$question}"] ?? null; 
                     if (!$questionText) {
                         continue;
                     }
 
-                    $identifier = $row["question_{$q}_identifier"] ?? "Q{$q}";
+                    $identifier = $row["question_{$question}_identifier"] ?? "Q{$question}";
 
                     $question = $quiz->questions()->create([
                         'identifier' => $identifier,
                         'question' => $questionText,
                     ]);
 
-                    for ($a = 1; $a <= 4; $a++) {
-                        $choiceText = $row["question_{$q}_choice_{$a}"] ?? null; 
-                        $isCorrect = $row["question_{$q}_choice_{$a}_correct"] ?? null;
+                    for ($answers = 1; $answers <= $this->answersMax; $answers++) {
+                        $choiceText = $row["question_{$question}_choice_{$answers}"] ?? null; 
+                        $isCorrect = $row["question_{$question}_choice_{$answers}_correct"] ?? null;
                         if ($choiceText && $isCorrect !== null) {
                             $question->answers()->create([
                                 'choice' => $choiceText,

@@ -18,7 +18,11 @@ class QuizzesTable
             ->columns([
                 TextColumn::make('id')
                     ->searchable(),
-                TextColumn::make('quiz_name')
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('subcategory')
+                    ->searchable(),
+                TextColumn::make('folder_guid')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
