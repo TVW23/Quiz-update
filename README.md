@@ -1,4 +1,5 @@
 # Quiz-Update
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/d25e270e-58c1-4d66-9883-2e970bcba583" />
 
 ## Inhoud
 * Over dit project
