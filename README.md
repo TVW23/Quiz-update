@@ -10,6 +10,7 @@
 * Zorg er voor dat je versie 8.4 of hoger van [PHP](https://www.php.net/downloads.php) geïnstalleerd hebt.
 * Zorg er voor dat je de laatste versie van [Laravel](https://laravel.com/docs/12.x/installation) geïnstalleerd hebt.
 * Zorg er voor dat je de laatste versie van [Herd](https://herd.laravel.com/windows) geïnstalleerd hebt.
+* Zorg er voor dat je de laatste versie van [Composer](https://getcomposer.org/download/) geïnstalleerd hebt.
 
 Als je deze vereisten hebt voltooid kun je doorgaan met de volgende stappen:
 1. Clone de github repository op een zelf bepaalde locatie op je pc (bijvoorbeeld C:\Development) en voer het volgende command uit in je cmd:
