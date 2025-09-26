@@ -29,6 +29,7 @@ git clone https://github.com/TVW23/Quiz-update/
 5. Als je al deze stappen hebt gedaan kan je de volgende commands runnen in je cmd in Visual Studio Code (open je cmd in visual studio code met ctrl + j):
 ```
 composer install
+composer fund
 npm install
 npm fund
 php artisan migrate
