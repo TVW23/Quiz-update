@@ -7,7 +7,8 @@
 * Credits
 
 ## Over dit project
-(Moet nog ingevuld worden)
+Als team hebben wij samen met [Consortium Beroepsonderwijs](https://www.consortiumbo.nl/) een applicatie gemaakt die gamification toevoegd aan oefenvragen. Om te zorgen dat studenten blijven oefenen hebben wij een puntensysteem met daarbij een leaderboard gemaakt. Dit zorgt voor veel competitie met leerlingen die allemaal op de eerste plaats willen blijven staan.
+
 ## Installatie
 ### Vereisten:
 *Hier staan de vereisten die je nodig hebt voor het installeren van onze webapplicatie.* 
