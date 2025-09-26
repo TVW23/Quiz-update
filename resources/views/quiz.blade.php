@@ -118,7 +118,7 @@
   <div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
     <p class="text-xl font-bold">{{ $quiz->name }}</p>
     <p class="bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-3 text-center text-white font-bold">
-      Punten
+      0
     </p>
   </div>
 
