@@ -268,7 +268,7 @@ function nextQuestion(step) {
   } else {
     alert("Quiz afgerond!");
     // Go back to the dashboard, or leaderboard
-    window.location.href = 'http://quiz-update.test/';
+    window.location.href = '/overzicht';
   }
 }
 </script>
