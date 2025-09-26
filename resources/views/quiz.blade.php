@@ -103,12 +103,23 @@ function checkAnswer(step) {
     alert("Kies eerst een antwoord!");
     return;
   }
+  // Disable all answer buttons and add borders
+  current.querySelectorAll('.button-layout').forEach(b => {
+    b.disabled = true;
+    b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
+    if (b.dataset.correct == "1") {
+      b.classList.add('ring-4', 'ring-green-500');
+    }
+  });
   // Check if correct
   if (selectedBtn.dataset.correct == "1") {
-    feedback.textContent = "Goed gedaan! Dit is het juiste antwoord.";
+    feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
     feedback.style.color = "green";
   } else {
-    feedback.textContent = "Helaas, dit is niet het juiste antwoord.";
+    // Find the correct answer text
+    const correctBtn = current.querySelector('[data-correct="1"]');
+    const correctText = correctBtn ? correctBtn.textContent.trim() : '';
+    feedback.textContent = `Helaas, je had de vraag fout. Het juiste antwoord was: ${correctText}`;
     feedback.style.color = "red";
   }
   feedback.style.display = '';
@@ -126,10 +137,11 @@ function nextQuestion(step) {
   document.getElementById('next-btn-' + step).style.display = 'none';
   document.getElementById('check-btn-' + step).style.display = '';
 
-  // Reset selected state for buttons
+  // Reset selected state and enable buttons
   current.querySelectorAll('.button-layout').forEach(b => {
-    b.classList.remove('ring-4', 'ring-black-500');
+    b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
     delete b.dataset.selected;
+    b.disabled = false;
   });
 
   current.classList.add('hidden');
@@ -137,8 +149,8 @@ function nextQuestion(step) {
     next.classList.remove('hidden');
   } else {
     alert("Quiz afgerond!");
-
     // Go back to the dashboard, or leaderboard
+    window.location.href = 'http://quiz-update.test/';
   }
 }
 </script>
