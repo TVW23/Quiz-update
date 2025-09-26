@@ -218,7 +218,9 @@ function checkAnswer(step) {
   const selectedBtn = current.querySelector('[data-selected="true"]');
   const feedback = document.getElementById('feedback-' + step);
   if (!selectedBtn) {
-    alert("Kies eerst een antwoord!");
+    feedback.textContent = "Kies eerst een antwoord.";
+    feedback.style.color = "red";
+    feedback.style.display = '';
     return;
   }
   // Disable all answer buttons and add borders
@@ -266,7 +268,6 @@ function nextQuestion(step) {
   if (next) {
     next.classList.remove('hidden');
   } else {
-    alert("Quiz afgerond!");
     // Go back to the dashboard, or leaderboard
     window.location.href = '/overzicht';
   }
