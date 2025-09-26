@@ -277,7 +277,7 @@ function checkAnswer(step) {
   } else {
     // 0, because no points have been gained 
     streaks.setStreak(0);
-    
+
     // Find the correct answer text
     const correctBtn = current.querySelector('[data-correct="1"]');
     const correctText = correctBtn ? correctBtn.textContent.trim() : '';
