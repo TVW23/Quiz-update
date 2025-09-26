@@ -27,6 +27,7 @@ git clone https://github.com/TVW23/Quiz-update/
 4. Zorg er voor dat je het .env bestand in je project stopt (het .env bestand kan je krijgen door dit op te vragen bij een van de beheerders)
 5. Als je al deze stappen hebt gedaan kan je de volgende commands runnen in je cmd in Visual Studio Code (open je cmd in visual studio code met ctrl + j):
 ```
+composer install
 npm install
 npm fund
 php artisan migrate

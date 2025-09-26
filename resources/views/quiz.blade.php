@@ -2,9 +2,11 @@
 
     <header class="bg-[#39B9EC] p-4 text-white">
       <div class="mx-auto flex max-w-6xl items-center justify-between">
-        <img class="w-[50px] h-[50px] rounded-[10%]" src="{{ asset('images/consortium_logo.jpg') }}" alt="Logo" />
+        <a href="/overzicht">
+          <img class="w-[50px] h-[50px] rounded-[10%]" src="{{ asset('images/consortium_logo.jpg') }}" alt="Logo" />
+        </a>
         <nav class="hidden sm:flex space-x-4">
-          <a href="#" class="hover:underline">Home</a>
+          <a href="/overzicht" class="hover:underline">Home</a>
           <a href="#" class="hover:underline">About</a>
           <a href="#" class="hover:underline">Contact</a>
           @if (Auth::check() && Auth::user()->isAdmin())
@@ -32,7 +34,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link> -->
                         <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
+                          <x-dropdown-link href="/overzicht">
                               {{ __('Home') }}
                           </x-dropdown-link>
                         </div>
