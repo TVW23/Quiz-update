@@ -11,10 +11,10 @@
       <div class="question-step shadow-lg rounded-2xl p-6 {{ $index > 0 ? 'hidden' : '' }}" data-step="{{ $index }}">
         <h1 class="text-2xl font-bold mb-6 text-center">Vraag {{ $index+1 }}</h1>
 
-        {{-- Placeholder image (can be dynamic later) --}}
+        <!-- {{-- Placeholder image (can be dynamic later) --}}
         <img class="mb-10 rounded-lg mx-auto"
              src="https://operaparallele.org/wp-content/uploads/2023/09/Placeholder_Image.png"
-             alt="Quiz image" />
+             alt="Quiz image" /> -->
 
         <p class="mb-5 text-center text-2xl font-bold">{{ $question->question }}</p>
 
