@@ -13,6 +13,10 @@ Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
 
+Route::get('/404', function () {
+    return view('404');
+})->name('404');
+
 // Route naar Mockup
 Route::get('/overzicht', function () {
     return view('overzicht');
