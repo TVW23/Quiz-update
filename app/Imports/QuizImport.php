@@ -72,7 +72,7 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
             '*.question_*' => 'nullable|string',
             '*.question_*_identifier' => 'nullable|string|unique:questions,identifier',
             '*.question_*_choice_*' => 'nullable|string',
-            '*.question_*_choice_*_correct' => 'nullable|boolean',
+            '*.question_*_choice_*_correct' => 'nullable|boolean|string',
         ];
     }
 
