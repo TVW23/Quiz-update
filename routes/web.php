@@ -20,10 +20,8 @@ Route::get('/404', function () {
     return view('404');
 })->name('404');
 
-// Route naar Mockup
-Route::get('/overzicht', function () {
-    return view('overzicht');
-})->middleware(['auth', 'verified'])->name('overzicht');
+Route::get('/overzicht', [QuizzesController::class ,'getQuizzes'])
+    ->middleware(['auth', 'verified'])->name('overzicht');
 
 Route::get('/quiz', function () {
     return view('quiz');
