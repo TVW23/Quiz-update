@@ -3,8 +3,8 @@
     <header class="bg-[#39B9EC] p-4 text-white">
       <div class="mx-auto flex max-w-6xl items-center justify-between">
         <img class="w-[50px] h-[50px] rounded-[10%]" src="{{ asset('images/consortium_logo.jpg') }}" alt="Logo" />
-        <nav class="space-x-4">
-          <a href="http://quiz-update.test/" class="hover:underline">Home</a>
+        <nav class="hidden sm:flex space-x-4">
+          <a href="#" class="hover:underline">Home</a>
           <a href="#" class="hover:underline">About</a>
           <a href="#" class="hover:underline">Contact</a>
           @if (Auth::check() && Auth::user()->isAdmin())
@@ -13,7 +13,7 @@
         </nav>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#32a4d1] hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
@@ -31,6 +31,31 @@
                         <!-- <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link> -->
+                        <div class="flex lg:hidden md:hidden">
+                          <x-dropdown-link href="#">
+                              {{ __('Home') }}
+                          </x-dropdown-link>
+                        </div>
+
+                        <div class="flex lg:hidden md:hidden">
+                          <x-dropdown-link href="#">
+                              {{ __('About') }}
+                          </x-dropdown-link>
+                        </div>
+
+                        <div class="flex lg:hidden md:hidden">
+                          <x-dropdown-link href="#">
+                              {{ __('Contact') }}
+                          </x-dropdown-link>
+                        </div>
+
+                        <div class="flex lg:hidden md:hidden">
+                          <x-dropdown-link href="#">
+                            @if (Auth::check() && Auth::user()->isAdmin())
+                              {{ __('Admin') }}
+                            @endif
+                          </x-dropdown-link>
+                        </div>
                         
                         <x-dropdown-link href="#" 
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
