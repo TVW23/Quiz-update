@@ -49,4 +49,10 @@ class User extends Authenticatable
     public function quizPoints() {
         return $this->hasMany(UserQuizPoints::class, 'user_id');
     }
+
+    public function isAdmin(): bool
+    {
+    return $this->user_type === 'admin';
+    }
+
 }

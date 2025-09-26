@@ -1,21 +1,36 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizzesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [QuizzesController::class ,'getQuizzes'])
+    ->middleware(['auth', 'verified'])->name('overzicht');
 
 // Route naar leaderboard
 
 Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
+
+
+Route::get('/quiz/{id}',[QuizzesController::class ,'getQuiz'])->name('quiz');
+
+Route::get('/404', function () {
+    return view('404');
+})->name('404');
+
+Route::get('/overzicht', [QuizzesController::class ,'getQuizzes'])
+    ->middleware(['auth', 'verified'])->name('overzicht');
+
+Route::get('/quiz', function () {
+    return view('quiz');
+})->name('quiz');
+
+Route::get('/tussenscherm', function () {
+    return view('tussenscherm');
+})->name('tussenscherm');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
