@@ -36,10 +36,10 @@ class PointSystem {
 
         while (this.running) {
             // Increase the elapsed time
-            this.elapsedTime += this.CONFIG.TIME_INCREMENT;
+            this.elapsedTime += PointSystem.CONFIG.TIME_INCREMENT;
 
             // Wait for some time
-            await new Promise(r => setTimeout(r, this.CONFIG.WAIT_TIME));
+            await new Promise(r => setTimeout(r, PointSystem.CONFIG.WAIT_TIME));
         }
     }
 
@@ -49,26 +49,33 @@ class PointSystem {
 
     resetTimer() {
         // Set the elapsed time to the start time
-        this.elapsedTime = this.CONFIG.START_TIME;
+        this.elapsedTime = PointSystem.CONFIG.START_TIME;
     }
 
     getCurrentTime() {
         return Number(this.elapsedTime);
     }
 
-    calculateCurrentPoints() {
+    getCalculatedCurrentPoints(time) {
+        console.log("Time: " + time);
         // calculate the minus points
-        var minusPoints = (this.elapsedTime * this.CONFIG.PENALTY_RATE / this.CONFIG.DIVISOR) * this.CONFIG.MULTIPLIER;
+        var minusPoints = (time * PointSystem.CONFIG.PENALTY_RATE / PointSystem.CONFIG.DIVISOR) * PointSystem.CONFIG.MULTIPLIER;
 
+        console.log("Minus points: " + minusPoints);
         // Check if the minus points are less than the minimum points, so that the user doesn't obtain less than the min points
-        if (minusPoints <= this.CONFIG.MIN_POINTS) {
-            minusPoints = this.CONFIG.MIN_POINTS;
+        if (minusPoints >= PointSystem.CONFIG.MIN_POINTS) {
+            minusPoints = PointSystem.CONFIG.MIN_POINTS;
         }
 
         // Reset current points
         this.currentPoints = 0;
 
-        this.currentPoints = this.CONFIG.MAX_POINTS - minusPoints;
+        this.currentPoints = PointSystem.CONFIG.MAX_POINTS - minusPoints;
+
+        // Round the number up to wholes
+        this.currentPoints = Math.round(this.currentPoints);
+
+        return this.currentPoints;
     }
 
     getCurrentPoints() {
