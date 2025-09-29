@@ -24,15 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getQuizAnswer(button) {
+    // Find the parent question step container
     const parent = button.closest('.question-step');
-
     // Remove selection and highlight from all answer buttons in this question
     parent.querySelectorAll('.button-layout').forEach(b => {
-        b.classList.remove('ring-4', 'ring-green-500', 'ring-red-500');
+        b.style.border = '';
         delete b.dataset.selected;
     });
-    button.classList.add('ring-4', 'ring-black-500');
-
+    button.style.border = '3px solid black';
     button.dataset.selected = "true";
     // Hide feedback and next button if user changes answer before checking
     const step = parent.dataset.step;
@@ -40,6 +39,7 @@ function getQuizAnswer(button) {
     document.getElementById('next-btn-' + step).style.display = 'none';
     document.getElementById('check-btn-' + step).style.display = '';
 }
+
 
 function checkAnswer(step) {
     const current = document.querySelector(`.question-step[data-step="${step}"]`);
@@ -54,14 +54,18 @@ function checkAnswer(step) {
         return;
     }   
 
-    // Disable all answer buttons and add borders
     current.querySelectorAll('.button-layout').forEach(b => {
+        // Disable the button
         b.disabled = true;
-        b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
+        // Add a border based on correctness
         if (b.dataset.correct == "1") {
-        b.classList.add('ring-4', 'ring-green-500');
+            b.style.border = "3px solid green";
+        } else {
+        // Remove all other borders
+        b.style.border = "none";
         }
     });
+
     // Check if correct
     if (selectedBtn.dataset.correct == "1") {
         feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
