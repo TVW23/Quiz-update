@@ -120,13 +120,26 @@
 
   <script src="../js/PointSystem.js"></script>
   <script src="../js//Streaks.js"></script>
-  <div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
-    <p class="text-xl font-bold">{{ $quiz->name }}</p>
-    <p id="streaks-text">streak:</p>
-    <p id="points-text" class="bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-3 text-center text-white font-bold">
+  <script src="../js/quizLogic.js"></script>
+<div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
+  <p class="text-xl font-bold">{{ $quiz->name }}</p>
+
+  <div class="flex items-center gap-4 bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-4">
+    <p id="points-text" class="text-center text-white font-bold">
       0
     </p>
+    <!-- Streak image with counter on top -->
+    <div class="relative flex items-center">
+      <img class="rounded-lg w-5 h-5" 
+        src="{{ asset('images/streak-image.png') }}" 
+        alt="Quiz image" />
+      <span id="streaks-text"
+        class="absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
+        0
+      </span>
+    </div>
   </div>
+</div>
 
   <div class="mx-auto mt-10 max-w-4xl px-10 mb-5">
     @foreach($quiz->questions as $index => $question)
@@ -197,133 +210,3 @@
     @apply w-full py-3 rounded-lg transition-colors duration-200;
   }
 </style>
-
-<script>
-
-var pointSystem = new PointSystem();
-var streaks = new Streaks();
-var pointsTxt;
-var totalPoints = 0;
-
-document.addEventListener('DOMContentLoaded', () => {
-  pointsTxt = document.getElementById("points-text");
-  streaksTxt = document.getElementById("streaks-text");
-  // Resetat quiz start
-  if (pointSystem  && streaks) {
-    pointSystem.resetTotalPoints();
-    streaks.resetStreak();
-    pointsTxt.innerHTML = '0';
-  }
-  // Start timer for first question
-  if (pointSystem ) {
-    pointSystem.resetTimer();
-    pointSystem.startTimer();
-  }
-});
-
-function getQuizAnswer(button) {
-  // Find the parent question step container
-  const parent = button.closest('.question-step');
-  // Remove selection and highlight from all answer buttons in this question
-  parent.querySelectorAll('.button-layout').forEach(b => {
-    b.classList.remove('ring-4', 'ring-green-500', 'ring-red-500');
-    delete b.dataset.selected;
-  });
-  button.classList.add('ring-4', 'ring-black-500');
-  button.dataset.selected = "true";
-  // Hide feedback and next button if user changes answer before checking
-  const step = parent.dataset.step;
-  document.getElementById('feedback-' + step).style.display = 'none';
-  document.getElementById('next-btn-' + step).style.display = 'none';
-  document.getElementById('check-btn-' + step).style.display = '';
-}
-
-function checkAnswer(step) {
-  const current = document.querySelector(`.question-step[data-step="${step}"]`);
-  const selectedBtn = current.querySelector('[data-selected="true"]');
-  const feedback = document.getElementById('feedback-' + step);
-  if (!selectedBtn) {
-    feedback.textContent = "Kies eerst een antwoord.";
-    feedback.style.color = "red";
-    feedback.style.display = '';
-    return;
-  }
-
-  // Disable all answer buttons and add borders
-  current.querySelectorAll('.button-layout').forEach(b => {
-    b.disabled = true;
-    b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
-    if (b.dataset.correct == "1") {
-      b.classList.add('ring-4', 'ring-green-500');
-    }
-  });
-  // Check if correct
-  if (selectedBtn.dataset.correct == "1") {
-    feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
-    feedback.style.color = "green";
-
-    pointSystem.stopTimer();
-    var elapsedTime = pointSystem.getCurrentTime();
-    var points = pointSystem.getCalculatedCurrentPoints(elapsedTime);
-
-    streaks.setStreak(points);
-
-    totalPoints += points;
-
-    // Update the points 
-    if (pointsTxt) {
-      pointsTxt.innerHTML = totalPoints.toString();
-    }
-  } else {
-    // 0, because no points have been gained 
-    streaks.setStreak(0);
-
-    // Find the correct answer text
-    const correctBtn = current.querySelector('[data-correct="1"]');
-    const correctText = correctBtn ? correctBtn.textContent.trim() : '';
-    feedback.textContent = `Helaas, je had de vraag fout. Het juiste antwoord was: ${correctText}`;
-    feedback.style.color = "red";
-  }
-  feedback.style.display = '';
-
-  var curStreak = streaks.getCurStreak();
-  streaksTxt.innerHTML = "streak: " + curStreak.toString();
-
-  document.getElementById('next-btn-' + step).style.display = '';
-  document.getElementById('check-btn-' + step).style.display = 'none';
-}
-
-
-function nextQuestion(step) {
-  const current = document.querySelector(`.question-step[data-step="${step}"]`);
-  const next = document.querySelector(`.question-step[data-step="${step+1}"]`);
-
-  // Hide feedback and next button for current question
-  document.getElementById('feedback-' + step).style.display = 'none';
-  document.getElementById('next-btn-' + step).style.display = 'none';
-  document.getElementById('check-btn-' + step).style.display = '';
-
-  // Reset selected state and enable buttons
-  current.querySelectorAll('.button-layout').forEach(b => {
-    b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
-    delete b.dataset.selected;
-    b.disabled = false;
-  });
-
-  current.classList.add('hidden');
-  if (next) {
-    next.classList.remove('hidden');
-    // Start timer for next question
-    if (pointSystem) {
-      pointSystem.resetTimer();
-      pointSystem.startTimer();
-    }
-  } else {
-    // Add points to the database
-    var pointsToAdd = pointSystem.getTotalPoints();
-
-    // Go back to the dashboard, or leaderboard
-    window.location.href = '/leaderboard';
-  }
-}
-</script>
