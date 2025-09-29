@@ -90,11 +90,11 @@
                     @method('delete')
 
                     <h2 class="text-lg font-medium text-gray-100">
-                        {{ __('Are you sure you want to delete your account?') }}
+                        {{ __('Weet je zeker dat je jouw account wilt verwijderen?') }}
                     </h2>
 
                     <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                        {{ __('Als jouw account verwijderd is, dan zijn alle gegevens van dat account permanent verwijderd. Voer je wachtwoord in om te bevestigen dat je jouw account permanent wilt verwijderen.') }}
                     </p>
 
                     <div class="mt-6">
@@ -105,7 +105,7 @@
                             name="password"
                             type="password"
                             class="mt-1 block w-3/4"
-                            placeholder="{{ __('Password') }}"
+                            placeholder="{{ __('Wachtwoord') }}"
                         />
 
                         <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
@@ -113,17 +113,24 @@
 
                     <div class="mt-6 flex justify-end">
                         <x-secondary-button x-on:click="$dispatch('close')">
-                            {{ __('Cancel') }}
+                            {{ __('Annuleer') }}
                         </x-secondary-button>
 
                         <x-danger-button class="ms-3 inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                            {{ __('Delete Account') }}
+                            {{ __('Verwijder Account') }}
                         </x-danger-button>
                     </div>
                 </form>
             </x-modal>
       </div>
     </header>
+
+    <div class="mt-6 inset-0 flex items-center justify-center z-50">
+      <div class="relative bg-green-100 border border-green-600 text-green-800 rounded-[10px] p-6 shadow-lg animate-fade-in">
+      <h1>Welkom {{ Auth::user()->name }}, je bent ingelogd!</h1>
+      <button class="absolute top-2 right-2 text-green-800 hover:text-green-600" onclick="this.parentElement.style.display='none'">×</button>
+      </div>
+    </div>
 
     <div class="mx-auto max-w-4xl p-10">
       <div class="grid grid-cols-1 gap-5 p-30 sm:grid-cols-2 md:grid-cols-3">
