@@ -58,6 +58,13 @@ class PointSystem {
 
     getCalculatedCurrentPoints(time) {
         console.log("Time: " + time);
+
+        // If user has answered within 1 second, give 1000 points 
+        if (time <= 1) {
+            this.currentPoints = 1000;
+            return this.currentPoints;
+        }
+
         // calculate the minus points
         var minusPoints = (time * PointSystem.CONFIG.PENALTY_RATE / PointSystem.CONFIG.DIVISOR) * PointSystem.CONFIG.MULTIPLIER;
 
