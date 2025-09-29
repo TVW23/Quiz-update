@@ -117,9 +117,13 @@
             </x-modal>
       </div>
     </header>
+
+  <script src="../js/PointSystem.js"></script>
+  <script src="../js//Streaks.js"></script>
   <div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
     <p class="text-xl font-bold">{{ $quiz->name }}</p>
-    <p class="bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-3 text-center text-white font-bold">
+    <p id="streaks-text">streak:</p>
+    <p id="points-text" class="bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-3 text-center text-white font-bold">
       0
     </p>
   </div>
@@ -196,6 +200,27 @@
 
 <script>
 
+var pointSystem = new PointSystem();
+var streaks = new Streaks();
+var pointsTxt;
+var totalPoints = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  pointsTxt = document.getElementById("points-text");
+  streaksTxt = document.getElementById("streaks-text");
+  // Resetat quiz start
+  if (pointSystem  && streaks) {
+    pointSystem.resetTotalPoints();
+    streaks.resetStreak();
+    pointsTxt.innerHTML = '0';
+  }
+  // Start timer for first question
+  if (pointSystem ) {
+    pointSystem.resetTimer();
+    pointSystem.startTimer();
+  }
+});
+
 function getQuizAnswer(button) {
   // Find the parent question step container
   const parent = button.closest('.question-step');
@@ -223,6 +248,7 @@ function checkAnswer(step) {
     feedback.style.display = '';
     return;
   }
+
   // Disable all answer buttons and add borders
   current.querySelectorAll('.button-layout').forEach(b => {
     b.disabled = true;
@@ -235,7 +261,23 @@ function checkAnswer(step) {
   if (selectedBtn.dataset.correct == "1") {
     feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
     feedback.style.color = "green";
+
+    pointSystem.stopTimer();
+    var elapsedTime = pointSystem.getCurrentTime();
+    var points = pointSystem.getCalculatedCurrentPoints(elapsedTime);
+
+    streaks.setStreak(points);
+
+    totalPoints += points;
+
+    // Update the points 
+    if (pointsTxt) {
+      pointsTxt.innerHTML = totalPoints.toString();
+    }
   } else {
+    // 0, because no points have been gained 
+    streaks.setStreak(0);
+
     // Find the correct answer text
     const correctBtn = current.querySelector('[data-correct="1"]');
     const correctText = correctBtn ? correctBtn.textContent.trim() : '';
@@ -243,6 +285,10 @@ function checkAnswer(step) {
     feedback.style.color = "red";
   }
   feedback.style.display = '';
+
+  var curStreak = streaks.getCurStreak();
+  streaksTxt.innerHTML = "streak: " + curStreak.toString();
+
   document.getElementById('next-btn-' + step).style.display = '';
   document.getElementById('check-btn-' + step).style.display = 'none';
 }
@@ -267,9 +313,17 @@ function nextQuestion(step) {
   current.classList.add('hidden');
   if (next) {
     next.classList.remove('hidden');
+    // Start timer for next question
+    if (pointSystem) {
+      pointSystem.resetTimer();
+      pointSystem.startTimer();
+    }
   } else {
+    // Add points to the database
+    var pointsToAdd = pointSystem.getTotalPoints();
+
     // Go back to the dashboard, or leaderboard
-    window.location.href = '/overzicht';
+    window.location.href = '/leaderboard';
   }
 }
 </script>
