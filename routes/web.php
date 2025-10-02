@@ -23,11 +23,11 @@ Route::get('/404', function () {
 })->name('404');
 
 Route::get('/overzicht', [QuizzesController::class ,'getQuizzes'])
-    ->middleware(['auth', 'verified'])->name('overzicht');
+    ->middleware(['auth', 'verified'])->name('overzicht.page');
 
 Route::get('/quiz', function () {
     return view('quiz');
-})->name('quiz');
+})->name('quiz.view');
 
 Route::get('/tussenscherm', function () {
     return view('tussenscherm');

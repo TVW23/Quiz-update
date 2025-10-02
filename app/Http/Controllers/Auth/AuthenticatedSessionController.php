@@ -28,7 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('overzicht', absolute: false));
+        return redirect()->intended(route('overzicht', absolute: false))
+            ->with('success', 'Welkom ' . Auth::user()->name . ', je bent ingelogd!');
     }
 
     /**
