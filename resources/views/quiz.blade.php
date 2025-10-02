@@ -40,14 +40,8 @@
                         </div>
 
                         <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
-                              {{ __('About') }}
-                          </x-dropdown-link>
-                        </div>
-
-                        <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
-                              {{ __('Contact') }}
+                          <x-dropdown-link href="/leaderboard">
+                              {{ __('Leaderboard') }}
                           </x-dropdown-link>
                         </div>
 
@@ -183,7 +177,7 @@
             <div class="flex justify-end">
             <button
               onclick="checkAnswer({{ $index }})"
-              class="px-6 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700"
+              class="px-6 py-2 bg-[#39B9EC] text-white rounded-xl shadow transition duration-200 "
               id="check-btn-{{ $index }}"
             >
               Nakijken &raquo;
