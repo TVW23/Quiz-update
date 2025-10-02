@@ -23,6 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function saveQuizPoints(quizId, points) {
+    console.log($`[saveQuizPoints] quizId: ${quizId} points: ${points}`);
+
+    fetch('/user-quiz-points', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // only needed if using web.php
+        },
+        // Combine all values into 1 json string, so its easier to send to php
+        body: JSON.stringify({
+            quiz_id: quizId,
+            points: points
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response:", data);
+    })
+    .catch(error => console.error("Error:", error));
+}
+
 function getQuizAnswer(button) {
     // Find the parent question step container
     const parent = button.closest('.question-step');
@@ -74,6 +96,7 @@ function checkAnswer(step) {
         pointSystem.stopTimer();
         var elapsedTime = pointSystem.getCurrentTime();
         var points = pointSystem.getCalculatedCurrentPoints(elapsedTime);
+        pointSystem.incrementPoints(points);
 
         streaks.setStreak(points);
 
@@ -150,10 +173,21 @@ function nextQuestion(step) {
         pointSystem.startTimer();
         }
     } else {
-        // Add points to the database
+        // Get the points obtained from the quiz
         var pointsToAdd = pointSystem.getTotalPoints();
 
+        let currentLocation = window.location; 
+        
+        // Get the current path name, so we can get the quiz
+        let pathName = currentLocation.pathname;
+
+        // Strip everything until the last slash, and also parse it into an int
+        var quizId = parseInt(/[^/]*$/.exec(pathName)[0]);
+
+        // Function cant get called ??
+        saveQuizPoints(quizId, pointsToAdd);
+
         // Go back to the dashboard, or leaderboard
-        window.location.href = '/leaderboard';
+        //window.location.href = '/leaderboard';
     }
 }
