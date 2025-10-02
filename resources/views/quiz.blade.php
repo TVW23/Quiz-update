@@ -130,7 +130,7 @@
       <div class="question-step shadow-lg rounded-2xl p-6 {{ $index > 0 ? 'hidden' : '' }}" data-step="{{ $index }}">
         <div class="space-between flex items-center justify-center mb-6">
           <h3 class="text-2xl font-bold text-center">Vraag {{ $index+1 }}</h1>
-          {{-- Streak system --}}
+          {{-- Streak systeem --}}
           <div class="relative flex items-center">
             <img class="rounded-lg w-5 h-5" 
               src="{{ asset('images/streak-image.png') }}" 
