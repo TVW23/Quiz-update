@@ -23,28 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function saveQuizPoints(quizId, points) {
-    console.log($`[saveQuizPoints] quizId: ${quizId} points: ${points}`);
-
-    fetch('/user-quiz-points', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // only needed if using web.php
-        },
-        // Combine all values into 1 json string, so its easier to send to php
-        body: JSON.stringify({
-            quiz_id: quizId,
-            points: points
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response:", data);
-    })
-    .catch(error => console.error("Error:", error));
-}
-
 function getQuizAnswer(button) {
     // Find the parent question step container
     const parent = button.closest('.question-step');
@@ -148,6 +126,27 @@ function animatePoints(oldValue, newValue, duration = 700) {
     requestAnimationFrame(step);
 }
 
+function saveQuizPoints(quizId, points) {
+    console.log(`[saveQuizPoints] quizId: ${quizId} points: ${points}`);
+
+    return fetch('/user-quiz-points', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            quiz_id: quizId,
+            points: points
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response:", data);
+    })
+    .catch(error => console.error("Error:", error));
+}
+
 function nextQuestion(step) {
     const current = document.querySelector(`.question-step[data-step="${step}"]`);
     const next = document.querySelector(`.question-step[data-step="${step+1}"]`);
@@ -184,10 +183,13 @@ function nextQuestion(step) {
         // Strip everything until the last slash, and also parse it into an int
         var quizId = parseInt(/[^/]*$/.exec(pathName)[0]);
 
-        // Function cant get called ??
-        saveQuizPoints(quizId, pointsToAdd);
-
-        // Go back to the dashboard, or leaderboard
-        //window.location.href = '/leaderboard';
+        saveQuizPoints(quizId, pointsToAdd)
+        .then(() => {
+            console.log("[saveQuizPoints] Points saved, now redirecting");
+            window.location.href = '/leaderboard';
+        })
+        .catch(err => {
+            console.error("[saveQuizPoints] error:", err);
+        });
     }
 }
