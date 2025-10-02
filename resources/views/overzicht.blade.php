@@ -68,7 +68,7 @@
                         
                         <x-dropdown-link href="#" 
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
-                            {{ __('Delete Account') }}
+                            {{ __('Verwijder Account') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
