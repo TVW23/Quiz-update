@@ -122,23 +122,25 @@
     <p id="points-text" class="text-center text-white font-bold">
       0
     </p>
-    <!-- Streak image with counter on top -->
-    <div class="relative flex items-center">
-      <img class="rounded-lg w-5 h-5" 
-        src="{{ asset('images/streak-image.png') }}" 
-        alt="Quiz image" />
-      <span id="streaks-text"
-        class="absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
-        0
-      </span>
-    </div>
   </div>
 </div>
 
   <div class="mx-auto mt-10 max-w-4xl px-10 mb-5">
     @foreach($quiz->questions as $index => $question)
       <div class="question-step shadow-lg rounded-2xl p-6 {{ $index > 0 ? 'hidden' : '' }}" data-step="{{ $index }}">
-        <h1 class="text-2xl font-bold mb-6 text-center">Vraag {{ $index+1 }}</h1>
+        <div class="space-between flex items-center justify-center mb-6">
+          <h3 class="text-2xl font-bold text-center">Vraag {{ $index+1 }}</h1>
+          {{-- Streak system --}}
+          <div class="relative flex items-center">
+            <img class="rounded-lg w-5 h-5" 
+              src="{{ asset('images/streak-image.png') }}" 
+              alt="Quiz image" />
+            <span id="streaks-text"
+              class="absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
+              0
+            </span>
+          </div>
+        </div>
 
         <!-- {{-- Placeholder image (can be dynamic later) --}}
         <img class="mb-10 rounded-lg mx-auto"
@@ -207,4 +209,9 @@
   .nakijken:hover {
     background: #34a2cf;
   }
+
+  .space-between > * + * {
+    margin-left: 15px;
+  }
+
 </style>
