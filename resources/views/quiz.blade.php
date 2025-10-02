@@ -177,7 +177,7 @@
             <div class="flex justify-end">
             <button
               onclick="checkAnswer({{ $index }})"
-              class="px-6 py-2 bg-[#39B9EC] text-white rounded-xl shadow transition duration-200 "
+              class="nakijken px-6 py-2 bg-[#39B9EC] text-white rounded-xl shadow transition duration-200"
               id="check-btn-{{ $index }}"
             >
               Nakijken &raquo;
@@ -202,5 +202,9 @@
 <style>
   .button-layout {
     @apply w-full py-3 rounded-lg transition-colors duration-200;
+  }
+
+  .nakijken:hover {
+    background: #34a2cf;
   }
 </style>
