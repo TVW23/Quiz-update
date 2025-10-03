@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\DB;
 use \App\Models\UserQuizPoints;
+use Illuminate\Support\Facades\Auth;
 
 class UserQuizPointsController extends Controller
 {
@@ -22,7 +23,7 @@ class UserQuizPointsController extends Controller
             'points'  => 'required|integer',
         ]);
 
-        $userId = session('user_id'); 
+        $userId = Auth::id(); 
 
         $userQuizPoints = UserQuizPoints::updateOrCreate(
             [
@@ -34,6 +35,8 @@ class UserQuizPointsController extends Controller
             ]
         );
 
+//        $userQuizPoints->save();
+        
         return response()->json([
             'message' => 'Points saved!',
             'data'    => $userQuizPoints,

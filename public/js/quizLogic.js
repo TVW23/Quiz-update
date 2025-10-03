@@ -140,11 +140,20 @@ function saveQuizPoints(quizId, points) {
             points: points
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error. status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         console.log("Response:", data);
+        return data;
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => {
+        console.error("Error:", error);
+        throw error;
+    });
 }
 
 function nextQuestion(step) {
@@ -172,6 +181,7 @@ function nextQuestion(step) {
         pointSystem.startTimer();
         }
     } else {
+        console.log("else stmt");
         // Get the points obtained from the quiz
         var pointsToAdd = pointSystem.getTotalPoints();
 
@@ -184,12 +194,15 @@ function nextQuestion(step) {
         var quizId = parseInt(/[^/]*$/.exec(pathName)[0]);
 
         saveQuizPoints(quizId, pointsToAdd)
-        .then(() => {
-            console.log("[saveQuizPoints] Points saved, now redirecting");
-            window.location.href = '/leaderboard';
-        })
-        .catch(err => {
-            console.error("[saveQuizPoints] error:", err);
-        });
+            .then((response) => {
+                console.log("[saveQuizPoints] Points saved, now redirecting");
+                console.log("Server response:", response);
+                
+                window.location.href = '/leaderboard';
+            })
+            .catch(err => {
+                console.error("[saveQuizPoints] error:", err);
+            });
+
     }
 }
