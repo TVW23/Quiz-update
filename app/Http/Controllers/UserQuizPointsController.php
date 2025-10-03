@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\DB;
 use \App\Models\UserQuizPoints;
 use Illuminate\Support\Facades\Auth;
 
