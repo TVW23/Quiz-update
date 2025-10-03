@@ -3,16 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizzesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserQuizPointsController;
 
 Route::get('/', [QuizzesController::class ,'getQuizzes'])
     ->middleware(['auth', 'verified'])->name('overzicht');
 
 // Route naar leaderboard
-
 Route::get('/leaderboard', function () {
     return view('leaderboard');
 })->name('leaderboard');
 
+// Route to store points in lb
+Route::post('/user-quiz-points', [UserQuizPointsController::class, 'setUserQuizPoints']);
 
 Route::get('/quiz/{id}',[QuizzesController::class ,'getQuiz'])->name('quiz');
 

@@ -74,6 +74,7 @@ function checkAnswer(step) {
         pointSystem.stopTimer();
         var elapsedTime = pointSystem.getCurrentTime();
         var points = pointSystem.getCalculatedCurrentPoints(elapsedTime);
+        pointSystem.incrementPoints(points);
 
         streaks.setStreak(points);
 
@@ -125,6 +126,36 @@ function animatePoints(oldValue, newValue, duration = 700) {
     requestAnimationFrame(step);
 }
 
+function saveQuizPoints(quizId, points) {
+    console.log(`[saveQuizPoints] quizId: ${quizId} points: ${points}`);
+
+    return fetch('/user-quiz-points', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            quiz_id: quizId,
+            points: points
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error. status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response:", data);
+        return data;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        throw error;
+    });
+}
+
 function nextQuestion(step) {
     const current = document.querySelector(`.question-step[data-step="${step}"]`);
     const next = document.querySelector(`.question-step[data-step="${step+1}"]`);
@@ -150,10 +181,28 @@ function nextQuestion(step) {
         pointSystem.startTimer();
         }
     } else {
-        // Add points to the database
+        console.log("else stmt");
+        // Get the points obtained from the quiz
         var pointsToAdd = pointSystem.getTotalPoints();
 
-        // Go back to the dashboard, or leaderboard
-        window.location.href = '/leaderboard';
+        let currentLocation = window.location; 
+        
+        // Get the current path name, so we can get the quiz
+        let pathName = currentLocation.pathname;
+
+        // Strip everything until the last slash, and also parse it into an int
+        var quizId = parseInt(/[^/]*$/.exec(pathName)[0]);
+
+        saveQuizPoints(quizId, pointsToAdd)
+            .then((response) => {
+                console.log("[saveQuizPoints] Points saved, now redirecting");
+                console.log("Server response:", response);
+                
+                window.location.href = '/leaderboard';
+            })
+            .catch(err => {
+                console.error("[saveQuizPoints] error:", err);
+            });
+
     }
 }

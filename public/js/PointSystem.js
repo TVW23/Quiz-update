@@ -89,9 +89,9 @@ class PointSystem {
         return Number(this.currentPoints);
     }
 
-    incrementPoints() {
+    incrementPoints(pointsToAdd) {
         // Add current points to the total points
-        this.totalPoints += this.currentPoints;
+        this.totalPoints += pointsToAdd;
     }
 
     getTotalPoints() {
