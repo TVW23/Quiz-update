@@ -27,22 +27,22 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
                     'folder_guid' => $row['folder_guid'] ?? Str::uuid()->toString(), 
                 ]);
 
-                for ($question = 1; $question <= $this->questionMax; $question++) {
-                    $questionText = $row["question_{$question}"] ?? null; 
+                for ($numQuestions = 1; $numQuestions <= $this->questionMax; $numQuestions++) {
+                    $questionText = $row["question_{$numQuestions}"] ?? null; 
                     if (!$questionText) {
                         continue;
                     }
 
-                    $identifier = $row["question_{$question}_identifier"] ?? "Q{$question}";
+                    $identifier = $row["question_{$numQuestions}_identifier"] ?? "Q{$numQuestions}";
 
                     $question = $quiz->questions()->create([
                         'identifier' => $identifier,
                         'question' => $questionText,
                     ]);
 
-                    for ($answers = 1; $answers <= $this->answersMax; $answers++) {
-                        $choiceText = $row["question_{$question}_choice_{$answers}"] ?? null; 
-                        $isCorrect = $row["question_{$question}_choice_{$answers}_correct"] ?? null;
+                    for ($numAnswers = 1; $numAnswers <= $this->answersMax; $numAnswers++) {
+                        $choiceText = $row["question_{$numQuestions}_choice_{$numAnswers}"] ?? null; 
+                        $isCorrect = $row["question_{$numQuestions}_choice_{$numAnswers}_correct"] ?? null;
                         if ($choiceText && $isCorrect !== null) {
                             $question->answers()->create([
                                 'choice' => $choiceText,
@@ -72,7 +72,7 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
             '*.question_*' => 'nullable|string',
             '*.question_*_identifier' => 'nullable|string|unique:questions,identifier',
             '*.question_*_choice_*' => 'nullable|string',
-            '*.question_*_choice_*_correct' => 'nullable|boolean|string',
+            '*.question_*_choice_*_correct' => 'nullable|string',
         ];
     }
 
@@ -89,5 +89,22 @@ class QuizImport implements ToCollection, WithHeadingRow, WithValidation, WithCh
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function validateBool($excelBool) : ?bool
+    {
+        if (is_null($excelBool)) {
+            return null;
+        }
+        $trueValues = ['1', 1, 'true', 'TRUE', 'True', true, 'yes', 'YES', 'Yes', 'waar', 'Waar', 'WAAR'];
+        $falseValues = ['0', 0, 'false', 'FALSE', 'False', false, 'no', 'NO', 'No', 'niet waar', 'Niet waar', 'NIET WAAR'];
+
+        if (in_array($excelBool, $trueValues)) {
+            return true;
+        } elseif (in_array($excelBool, $falseValues)) {
+            return false;
+        } else {
+            throw new \InvalidArgumentException("Invalid boolean value: {$excelBool}");
+        }
     }
 }
