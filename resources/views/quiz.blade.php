@@ -197,11 +197,24 @@
       0
     </p>
   </div>
+</div>
 
   <div class="mx-auto mt-10 max-w-4xl px-10 mb-5">
     @foreach($quiz->questions as $index => $question)
       <div class="question-step shadow-lg rounded-2xl p-6 {{ $index > 0 ? 'hidden' : '' }}" data-step="{{ $index }}">
-        <h1 class="text-2xl font-bold mb-6 text-center">Vraag {{ $index+1 }}</h1>
+        <div class="space-between flex items-center justify-center mb-6">
+          <h3 class="text-2xl font-bold text-center">Vraag {{ $index+1 }}</h1>
+          {{-- Streak systeem --}}
+          <div class="relative flex items-center">
+            <img class="rounded-lg w-5 h-5" 
+              src="{{ asset('images/streak-image.png') }}" 
+              alt="Quiz image" />
+            <span id="streaks-text"
+              class="absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
+              0
+            </span>
+          </div>
+        </div>
 
         <!-- {{-- Placeholder image (can be dynamic later) --}}
         <img class="mb-10 rounded-lg mx-auto"
@@ -240,7 +253,7 @@
             <div class="flex justify-end">
             <button
               onclick="checkAnswer({{ $index }})"
-              class="px-6 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700"
+              class="nakijken px-6 py-2 bg-[#39B9EC] text-white rounded-xl shadow transition duration-200"
               id="check-btn-{{ $index }}"
             >
               Nakijken &raquo;
@@ -319,35 +332,9 @@ function checkAnswer(step) {
     feedback.textContent = `Helaas, je had de vraag fout. Het juiste antwoord was: ${correctText}`;
     feedback.style.color = "red";
   }
-  feedback.style.display = '';
-  document.getElementById('next-btn-' + step).style.display = '';
-  document.getElementById('check-btn-' + step).style.display = 'none';
-}
 
-
-function nextQuestion(step) {
-  const current = document.querySelector(`.question-step[data-step="${step}"]`);
-  const next = document.querySelector(`.question-step[data-step="${step+1}"]`);
-
-  // Hide feedback and next button for current question
-  document.getElementById('feedback-' + step).style.display = 'none';
-  document.getElementById('next-btn-' + step).style.display = 'none';
-  document.getElementById('check-btn-' + step).style.display = '';
-
-  // Reset selected state and enable buttons
-  current.querySelectorAll('.button-layout').forEach(b => {
-    b.classList.remove('ring-4', 'ring-black-500', 'ring-green-500', 'ring-red-500');
-    delete b.dataset.selected;
-    b.disabled = false;
-  });
-
-  current.classList.add('hidden');
-  if (next) {
-    next.classList.remove('hidden');
-  } else {
-    alert("Quiz afgerond!");
-    // Go back to the dashboard, or leaderboard
-    window.location.href = 'http://quiz-update.test/';
+  .space-between > * + * {
+    margin-left: 15px;
   }
-}
-</script>
+
+</style>

@@ -7,7 +7,8 @@
 * Credits
 
 ## Over dit project
-(Moet nog ingevuld worden)
+Als team hebben wij samen met [Consortium Beroepsonderwijs](https://www.consortiumbo.nl/) een applicatie gemaakt die gamification toevoegd aan oefenvragen. Om te zorgen dat studenten blijven oefenen hebben wij een puntensysteem met daarbij een leaderboard gemaakt. Dit zorgt voor veel competitie met leerlingen die allemaal op de eerste plaats willen blijven staan.
+
 ## Installatie
 ### Vereisten:
 *Hier staan de vereisten die je nodig hebt voor het installeren van onze webapplicatie.* 
@@ -15,6 +16,7 @@
 * Zorg er voor dat je de laatste versie van [Laravel](https://laravel.com/docs/12.x/installation) geïnstalleerd hebt.
 * Zorg er voor dat je de laatste versie van [Herd](https://herd.laravel.com/windows) geïnstalleerd hebt.
 * Zorg er voor dat je de laatste versie van [Composer](https://getcomposer.org/download/) geïnstalleerd hebt.
+* Zorg er voor dat je de laatste versie van [NodeJS](https://nodejs.org/en/download/) geïnstalleerd hebt.
 * Zorg er voor dat je [Visual Studio Code](https://code.visualstudio.com/download) geïnstalleerd hebt.
 
 Als je deze vereisten hebt voltooid kun je doorgaan met de volgende stappen:
@@ -27,6 +29,8 @@ git clone https://github.com/TVW23/Quiz-update/
 4. Zorg er voor dat je het .env bestand in je project stopt (het .env bestand kan je krijgen door dit op te vragen bij een van de beheerders)
 5. Als je al deze stappen hebt gedaan kan je de volgende commands runnen in je cmd in Visual Studio Code (open je cmd in visual studio code met ctrl + j):
 ```
+composer install
+composer fund
 npm install
 npm fund
 php artisan migrate
