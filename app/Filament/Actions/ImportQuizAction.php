@@ -51,7 +51,6 @@ class ImportQuizAction extends Action
                     $importer = new QuizImport();
                     Excel::import($importer, $filePath);
                 } catch (\Exception $e) {
-                    dd($e, "ggs");
                     Notification::make()
                         ->title('Import Failed')
                         ->body($e->getMessage())
