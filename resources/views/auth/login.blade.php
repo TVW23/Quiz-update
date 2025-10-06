@@ -26,7 +26,7 @@
                     <div class="block mt-5 justify-self-center">
                         <label for="remember_me" class="inline-flex items-center">
                             <input id="remember_me" type="checkbox" class=" rounded"  name="remember">
-                            <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Onthoudt mij') }}</span>
+                            <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Onthoud mij') }}</span>
                         </label>
                     </div>
 
