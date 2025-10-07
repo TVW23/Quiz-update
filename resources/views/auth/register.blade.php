@@ -34,9 +34,7 @@
             <!-- Registreer knop -->
             <div class="flex justify-center w-full max-w-[400px] px-10">
                 <x-primary-button :image_buttonColor="'#E72B76'">
-                    <a action="{{ route('register') }}" href="{{ route('login') }}">
                         {{ __('Registreer') }}
-                    </a>
                 </x-primary-button>
             </div>
 

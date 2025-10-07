@@ -58,6 +58,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('overzicht', absolute: false));
+        
+        return redirect(route('overzicht', absolute: false))
+            ->with('success', 'Welkom ' . Auth::user()->name . ', je bent ingelogd!');
     }
 }
