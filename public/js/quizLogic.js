@@ -2,11 +2,10 @@ var pointSystem = new PointSystem();
 var streaks = new Streaks();
 var pointsTxt;
 var totalPoints = 0;
-var streaksTxt;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Loaded the document");
     pointsTxt = document.getElementById("points-text");
-    streaksTxt = document.getElementById("streaks-text");
   // Resetat quiz start
     if (pointSystem  && streaks) {
         pointSystem.resetTotalPoints();
@@ -85,7 +84,7 @@ function checkAnswer(step) {
         const oldPoints = parseInt(pointsTxt.innerHTML) || 0;
         animatePoints(oldPoints, totalPoints);
         }
-        } else {
+    } else {
         // 0, because no points have been gained 
         streaks.setStreak(0);
 
@@ -97,8 +96,7 @@ function checkAnswer(step) {
     }
     feedback.style.display = '';
 
-    var curStreak = streaks.getCurStreak();
-    streaksTxt.innerHTML = curStreak.toString();
+    updateVisibleStreak();
 
     document.getElementById('next-btn-' + step).style.display = '';
     document.getElementById('check-btn-' + step).style.display = 'none';
@@ -175,6 +173,10 @@ function nextQuestion(step) {
     current.classList.add('hidden');
     if (next) {
         next.classList.remove('hidden');
+
+        // Update streak after going to new question
+        updateVisibleStreak();
+
         // Start timer for next question
         if (pointSystem) {
         pointSystem.resetTimer();
@@ -205,4 +207,22 @@ function nextQuestion(step) {
             });
 
     }
+}
+
+function updateVisibleStreak() {
+    // Get the question step thats visible
+    const visible = document.querySelector('.question-step:not(.hidden)');
+
+    if (!visible) {
+        console.log('question step not found');
+        return;
+    }
+    // Get the streak text spna under the question step
+    const streakSpan = visible.querySelector('.streaks-text');
+    if (!streakSpan) {
+        console.log('streaks text not found');
+        return;
+    }
+    // Set the text of the span to the cur string (also turn it into a string)
+    streakSpan.innerHTML = String(streaks.getCurStreak());
 }
