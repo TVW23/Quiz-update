@@ -42,17 +42,16 @@
   </div>
 
   <div class="mx-auto mt-5 max-w-4xl p-20">
-    {{-- Temp forloop --}}
-    @for($i = 0; $i < 11; $i++)
+    @foreach($userQuizPoints as $index => $quizPoint)
     <div class="flex items-center justify-between rounded-lg bg-red-500 px-5 py-5 font-bold text-white mb-6">
       <div class="flex items-center space-x-5">
-        <p>4</p>
+        <p>{{ $index+1 }}</p>
         <img class="rounded-full" width="50" height="50" src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" alt="" />
-        <p>Anna</p>
+        <p>{{ $quizPoint->user->name }}</p>
       </div>
-      <p class="text-lg">23</p>
+      <p class="text-lg">{{ $quizPoint->points }}</p>
     </div>
-    @endfor
+    @endforeach
   </div>
 </x-app-layout>
 
