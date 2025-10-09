@@ -11,35 +11,60 @@
     <div class="ellipse **:absolute left-1/2bg-blue-500"></div>
   </div> --}}
 
-  <div class="w-full h-auto mx-auto bg-gray-100 pt-15">
-    <div class="flex justify-center items-end space-x-4">
-      <!-- 2nd Place -->
-      <div class="flex flex-col items-center">
-        <img class="rounded-full mb-2 border-4 border-gray-300" width="60" height="60" src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" alt="2nd place" />
-        <div class="bg-gray-700 w-20 h-32 flex items-center justify-center text-white text-xl font-bold">
-          <p class="mt-2 font-semibold">3204 pts</p>
+<div class="mx-auto h-auto w-full bg-gray-100 pt-15">
+  <div class="flex items-end justify-center space-x-4">
+    <!-- 2nd Place -->
+    <div class="flex flex-col items-center">
+      <img
+        class="mb-2 rounded-full border-4 border-gray-300"
+        width="60"
+        height="60"
+        src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"
+        alt="2nd place"
+      />
+      <div class="flex h-auto w-full items-start justify-center bg-gray-700 p-5">
+        <div class="mb-10 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
+          <p class="text-xl font-bold">Anna</p>
+          <p>3204 pts</p>
         </div>
-        {{-- <p class="mt-2 font-semibold">3204 pts</p> --}}
       </div>
+    </div>
 
-      <!-- 1st Place -->
-      <div class="flex flex-col items-center">
-        <img class="rounded-full mb-2 border-4 border-yellow-400" width="70" height="70" src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" alt="1st place" />
-        <div class="bg-yellow-500 w-20 h-44 flex items-center justify-center text-white text-2xl font-bold">
-          <p class="mt-2 font-semibold">4200 pts</p>
+    <!-- 1st Place -->
+    <div class="flex flex-col items-center">
+      <img
+        class="mb-2 rounded-full border-4 border-yellow-400"
+        width="70"
+        height="70"
+        src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"
+        alt="1st place"
+      />
+      <div class="flex h-auto w-full items-start justify-center bg-yellow-500 p-5">
+        <div class="mb-20 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
+          <p class="text-xl font-bold">John</p>
+          <p>4200 pts</p>
         </div>
-        {{-- <p class="mt-2 font-semibold">4200 pts</p> --}}
       </div>
+    </div>
 
-      <!-- 3rd Place -->
-      <div class="flex flex-col items-center">
-        <img class="rounded-full mb-2 border-4 border-amber-700" width="55" height="55" src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" alt="3rd place" />
-        <div class="bg-amber-700 w-20 h-24 flex items-center justify-center text-white text-xl font-bold">
-          <p class="mt-2 font-semibold">2800 pts</p>
+    <!-- 3rd Place -->
+    <div class="flex flex-col items-center">
+      <img
+        class="mb-2 rounded-full border-4 border-amber-700"
+        width="55"
+        height="55"
+        src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"
+        alt="3rd place"
+      />
+      <div class="flex h-auto w-full items-start justify-center bg-amber-700 p-5">
+        <div class="mb-5 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
+          <p class="text-xl font-bold">Liam</p>
+          <p>2800 pts</p>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <div class="mx-auto mt-5 max-w-4xl p-20">
     {{-- Temp forloop --}}
