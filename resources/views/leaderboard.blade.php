@@ -66,6 +66,7 @@
   </div>
 </div>
 
+
   <div class="mx-auto mt-5 max-w-4xl p-20">
     {{-- Temp forloop --}}
     @for($i = 0; $i < 11; $i++)
