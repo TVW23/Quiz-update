@@ -1,18 +1,18 @@
 <x-app-layout>
-
+ 
   <script src="../js/PointSystem.js"></script>
   <script src="../js//Streaks.js"></script>
   <script src="../js/quizLogic.js"></script>
 <div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
   <p class="text-xl font-bold">{{ $quiz->name }}</p>
-
+ 
   <div class="flex items-center gap-4 bg-gray-300 border-2 border-gray-500 rounded-md py-2 px-4">
     <p id="points-text" class="text-center text-white font-bold">
       0
     </p>
   </div>
 </div>
-
+ 
   <div class="mx-auto mt-10 max-w-4xl px-10 mb-5">
     @foreach($quiz->questions as $index => $question)
       <div class="question-step shadow-lg rounded-2xl p-6 {{ $index > 0 ? 'hidden' : '' }}" data-step="{{ $index }}">
@@ -20,8 +20,8 @@
           <h3 class="text-2xl font-bold text-center">Vraag {{ $index+1 }}</h1>
           {{-- Streak systeem --}}
           <div class="relative flex items-center">
-            <img class="rounded-lg w-5 h-5" 
-              src="{{ asset('images/streak-image.png') }}" 
+            <img class="rounded-lg w-5 h-5"
+              src="{{ asset('images/streak-image.png') }}"
               alt="Quiz image" />
             <span
               class="streaks-text absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
@@ -29,14 +29,14 @@
             </span>
           </div>
         </div>
-
+ 
         <!-- {{-- Placeholder image (can be dynamic later) --}}
         <img class="mb-10 rounded-lg mx-auto"
              src="https://operaparallele.org/wp-content/uploads/2023/09/Placeholder_Image.png"
              alt="Quiz image" /> -->
-
+ 
         <p class="mb-5 text-center text-2xl font-bold">{{ $question->question }}</p>
-
+ 
         <div class="grid grid-cols-2 gap-4 text-white font-bold">
           @foreach($question->answers as $aIndex => $answer)
             <div>
@@ -61,7 +61,7 @@
             </div>
           @endforeach
         </div>
-
+ 
         <div class="text-center mt-6">
           <p class="mb-4 text-lg font-semibold" style="display:none" id="feedback-{{ $index }}"></p>
             <div class="flex justify-end">
@@ -88,18 +88,18 @@
     @endforeach
   </div>
 </x-app-layout>
-
+ 
 <style>
   .button-layout {
     @apply w-full py-3 rounded-lg transition-colors duration-200;
   }
-
+ 
   .nakijken:hover {
     background: #34a2cf;
   }
-
+ 
   .space-between > * + * {
     margin-left: 15px;
   }
-
+ 
 </style>
