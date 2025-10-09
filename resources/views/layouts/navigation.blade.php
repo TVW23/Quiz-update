@@ -43,18 +43,6 @@
                         </x-dropdown-link>
                     </div>
 
-                    <div class="flex lg:hidden md:hidden">
-                        <x-dropdown-link href="#">
-                            {{ __('About') }}
-                        </x-dropdown-link>
-                    </div>
-
-                    <div class="flex lg:hidden md:hidden">
-                        <x-dropdown-link href="#">
-                            {{ __('Contact') }}
-                        </x-dropdown-link>
-                    </div>
-
                     @auth
                         @if(Auth::user()->isAdmin())
                             <div class="flex lg:hidden md:hidden">
