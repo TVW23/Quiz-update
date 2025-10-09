@@ -15,6 +15,17 @@ class UserQuizPointsController extends Controller
         return $userQuizPoints;
     }
 
+    public function getUserQuizPointsByQuizId(int $quizId)
+    {
+        $userQuizPoints = UserQuizPoints::with('user')
+            ->where('quiz_id', $quizId)
+            ->orderBy('points', 'desc')
+            ->limit(10)
+            ->get();
+
+        return view('leaderboard', compact('userQuizPoints'));
+    }
+    
     public function setUserQuizPoints(Request $request)
     {
         $request->validate([

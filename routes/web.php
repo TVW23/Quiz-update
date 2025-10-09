@@ -9,9 +9,7 @@ Route::get('/', [QuizzesController::class ,'getQuizzes'])
     ->middleware(['auth', 'verified'])->name('overzicht');
 
 // Route naar leaderboard
-Route::get('/leaderboard', function () {
-    return view('leaderboard');
-})->name('leaderboard');
+Route::get('/leaderboard/{id}', [UserQuizPointsController::class, 'getUserQuizPointsByQuizId'])->name('leaderboard');
 
 // Route to store points in lb
 Route::post('/user-quiz-points', [UserQuizPointsController::class, 'setUserQuizPoints']);
@@ -24,10 +22,6 @@ Route::get('/404', function () {
 
 Route::get('/overzicht', [QuizzesController::class ,'getQuizzes'])
     ->middleware(['auth', 'verified'])->name('overzicht.page');
-
-Route::get('/quiz', function () {
-    return view('quiz');
-})->name('quiz.view');
 
 Route::get('/tussenscherm', function () {
     return view('tussenscherm');

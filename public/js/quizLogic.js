@@ -200,7 +200,7 @@ function nextQuestion(step) {
                 console.log("[saveQuizPoints] Points saved, now redirecting");
                 console.log("Server response:", response);
                 
-                window.location.href = '/leaderboard';
+                window.location.href = `/leaderboard/${quizId}`;
             })
             .catch(err => {
                 console.error("[saveQuizPoints] error:", err);

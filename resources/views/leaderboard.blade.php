@@ -14,6 +14,7 @@
 <div class="mx-auto h-auto w-full bg-gray-100 pt-15">
   <div class="flex items-end justify-center space-x-4">
     <!-- 2nd Place -->
+     @if (isset($userQuizPoints[1]))
     <div class="flex flex-col items-center">
       <img
         class="mb-2 rounded-full border-4 border-gray-300"
@@ -24,13 +25,15 @@
       />
       <div class="flex h-auto w-full items-start justify-center bg-gray-700 p-5">
         <div class="mb-10 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
-          <p class="text-xl font-bold">Anna</p>
-          <p>3204 pts</p>
+          <p class="text-xl font-bold">{{ $userQuizPoints[1]->user->name }}</p>
+          <p>{{ $userQuizPoints[1]->points }} pts</p>
         </div>
       </div>
     </div>
+      @endif
 
     <!-- 1st Place -->
+    @if (isset($userQuizPoints[0]))
     <div class="flex flex-col items-center">
       <img
         class="mb-2 rounded-full border-4 border-yellow-400"
@@ -41,13 +44,14 @@
       />
       <div class="flex h-auto w-full items-start justify-center bg-yellow-500 p-5">
         <div class="mb-20 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
-          <p class="text-xl font-bold">John</p>
-          <p>4200 pts</p>
+          <p class="text-xl font-bold">{{ $userQuizPoints[0]->user->name }}</p>
+          <p>{{ $userQuizPoints[0]->points }} pts</p>
         </div>
       </div>
     </div>
-
+    @endif
     <!-- 3rd Place -->
+    @if (isset($userQuizPoints[2]))
     <div class="flex flex-col items-center">
       <img
         class="mb-2 rounded-full border-4 border-amber-700"
@@ -58,26 +62,26 @@
       />
       <div class="flex h-auto w-full items-start justify-center bg-amber-700 p-5">
         <div class="mb-5 space-y-2 bg-white px-5 py-2 text-center text-gray-700">
-          <p class="text-xl font-bold">Liam</p>
-          <p>2800 pts</p>
+          <p class="text-xl font-bold">{{ $userQuizPoints[2]->user->name }}</p>
+          <p>{{ $userQuizPoints[2]->points }} pts</p>
         </div>
       </div>
     </div>
+    @endif
   </div>
 </div>
 
   <div class="mx-auto mt-5 max-w-4xl p-20">
-    {{-- Temp forloop --}}
-    @for($i = 0; $i < 11; $i++)
+    @foreach($userQuizPoints as $index => $quizPoint)
     <div class="flex items-center justify-between rounded-lg bg-red-500 px-5 py-5 font-bold text-white mb-6">
       <div class="flex items-center space-x-5">
-        <p>4</p>
+        <p>{{ $index+1 }}</p>
         <img class="rounded-full" width="50" height="50" src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" alt="" />
-        <p>Anna</p>
+        <p>{{ $quizPoint->user->name }}</p>
       </div>
-      <p class="text-lg">23</p>
+      <p class="text-lg">{{ $quizPoint->points }}</p>
     </div>
-    @endfor
+    @endforeach
   </div>
 </x-app-layout>
 
