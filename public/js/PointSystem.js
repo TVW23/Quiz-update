@@ -22,6 +22,7 @@ class PointSystem {
     DIVISOR: 3,
     MULTIPLIER: 10,
     START_TIME: 0,
+    PERFECT_TIME: 1.5
     };
 
     constructor() {
@@ -60,7 +61,7 @@ class PointSystem {
         console.log("Time: " + time);
 
         // If user has answered within 1 second, give 1000 points 
-        if (time <= 1) {
+        if (time <= PointSystem.CONFIG.PERFECT_TIME) {
             this.currentPoints = 1000;
             return this.currentPoints;
         }
