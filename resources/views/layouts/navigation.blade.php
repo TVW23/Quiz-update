@@ -6,7 +6,6 @@
         <nav class="hidden sm:flex space-x-4">
           <a href="/" class="hover:underline">Home</a>
           {{-- <a href="#" class="hover:underline"></a> --}}
-          <a href="/leaderboard" class="hover:underline">Leaderboard</a>
           @if (Auth::check() && Auth::user()->isAdmin())
             <a href="/admin" class="hover:underline">Admin</a>
           @endif

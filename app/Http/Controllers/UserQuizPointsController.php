@@ -26,6 +26,11 @@ class UserQuizPointsController extends Controller
         return view('leaderboard', compact('userQuizPoints'));
     }
 
+    public function getTopThreeQuizPointsByQuizId(int $quizId)
+    {
+        
+    }
+
     public function setUserQuizPoints(Request $request)
     {
         $request->validate([
