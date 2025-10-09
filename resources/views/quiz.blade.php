@@ -23,8 +23,8 @@
             <img class="rounded-lg w-5 h-5" 
               src="{{ asset('images/streak-image.png') }}" 
               alt="Quiz image" />
-            <span id="streaks-text"
-              class="absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
+            <span
+              class="streaks-text absolute left-3 top-2 text-orange-500 text-xs font-extrabold px-2 py-1 rounded bg-transparent">
               0
             </span>
           </div>
