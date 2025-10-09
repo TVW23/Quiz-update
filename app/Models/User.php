@@ -3,11 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Panel;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\UserType;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -48,6 +52,15 @@ class User extends Authenticatable
 
     public function quizPoints() {
         return $this->hasMany(UserQuizPoints::class, 'user_id');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($this->user_type == userType::ADMIN->value) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function isAdmin(): bool
