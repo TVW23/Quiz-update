@@ -1,8 +1,11 @@
 <x-app-layout>
- 
+   <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <script src="../js/PointSystem.js"></script>
   <script src="../js//Streaks.js"></script>
   <script src="../js/quizLogic.js"></script>
+
 <div class="flex items-center justify-between mx-auto max-w-4xl px-10 mt-6">
   <p class="text-xl font-bold">{{ $quiz->name }}</p>
  
