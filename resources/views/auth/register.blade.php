@@ -13,7 +13,7 @@
 
             <!-- Naam -->
             <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
-                <x-text-input id="name" placeholder="Naam" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-text-input id="name" placeholder="Gebruikersnaam" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <!-- Email Addres -->
