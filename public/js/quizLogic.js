@@ -67,6 +67,14 @@ function checkAnswer(step) {
 
     // Check if correct
     if (selectedBtn.dataset.correct == "1") {
+        // Launch confetti
+        confetti({
+        particleCount: 100,
+        spread: 100,
+        origin: { y: 0.6 },
+        ticks: 90 
+        });
+
         feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
         feedback.style.color = "green";
 
