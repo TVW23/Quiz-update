@@ -2,28 +2,37 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Quiz Update') }}</title>
+
+        <link rel="stylesheet" href="/public/css/app.css">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    @props(['image_buttonColor' => '#39B9EC'])
+    <body>
+        <div class="flex flex-col">
+            <div class="flex flex-col justify-center h-screen overflow-hidden">
+                <div class="flex justify-center items-center">
+                    <a href="/">
+                        <div class="flex">
+                            <div class="mb-[50px] w-[150px] h-[150px] rounded-[10%] flex items-center justify-center overflow-hidden"
+                                style="background-color: {{ $image_buttonColor ?? '#39B9EC' }};">
+                                <x-consortium class="flex w-[120px] h-[120px] rounded-[10%]" />
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+                <div class="flex flex-col items-center">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
     </body>

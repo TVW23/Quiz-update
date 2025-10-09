@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class answer extends Model
 {
     protected $table = 'answers';
-    protected $fillable = ['choice', 'is_correct'];
+    protected $fillable = ['question_id', 'choice', 'is_correct'];
 
     public function question (){
         return $this->belongsTo(Question::class);

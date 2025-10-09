@@ -1,54 +1,49 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<x-guest-layout :image_buttonColor="'#E72B76'">
+    <div class="w-full max-w-[400px]">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+            <!-- Foutmeldingen -->
+            <div class="flex flex-col justify-center w-full max-w-[400px] mb-5 px-10">
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <!-- Naam -->
+            <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
+                <x-text-input id="name" placeholder="Naam" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- Email Addres -->
+            <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
+                <x-text-input id="email" placeholder="Email" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <!-- Wachtwoord -->
+            <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
+                <x-text-input id="password" placeholder="Wachtwoord" type="password" name="password" required autocomplete="new-password" />
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- Bevestig wachtwoord -->
+            <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
+                <x-text-input id="password_confirmation" placeholder="Bevestig Wachtwoord" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <!-- Registreer knop -->
+            <div class="flex justify-center w-full max-w-[400px] px-10">
+                <x-primary-button :image_buttonColor="'#E72B76'">
+                        {{ __('Registreer') }}
+                </x-primary-button>
+            </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                <a href="{{ route('login') }}">
-                    {{ __('Register') }}
+            <!-- Heb je al een account knop -->
+            <div class="flex items-center justify-center mt-4">
+                <a class="underline text-sm text-gray-400 rounded-md" href="{{ route('login') }}">
+                    {{ __('Heb je al een account?') }}
                 </a>
-            </x-primary-button>
-        </div>
-    </form>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>

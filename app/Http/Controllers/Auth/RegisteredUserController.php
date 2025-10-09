@@ -31,8 +31,21 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Vul je naam in.',
+            'email.required' => 'Een e-mailadres is verplicht.',
+            'email.email' => 'Voer een geldig e-mailadres in.',
+            'email.unique' => 'Dit e-mailadres is al geregistreerd.',
+            'password.required' => 'Je wachtwoord is verplicht.',
+            'password.confirmed' => 'De wachtwoorden komen niet overeen.',
+            'min' => [
+            'string' => ':attribute moet minimaal :min tekens bevatten.',
+            ],
+            'max' => [
+            'string' => ':attribute mag niet meer dan :max tekens bevatten.',
+            ]
         ]);
 
         $user = User::create([
@@ -45,6 +58,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        
+        return redirect(route('overzicht', absolute: false))
+            ->with('success', 'Welkom ' . Auth::user()->name . ', je bent ingelogd!');
     }
 }

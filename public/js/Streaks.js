@@ -23,7 +23,9 @@ class Streaks {
     }
 
     increaseStreak() {
-        this.curStreak += this.CONFIG.STREAK_INCREMENT_COUNT;
+        this.curStreak += Streaks.CONFIG.STREAK_INCREMENT_COUNT;
+        console.log("Increased the streak!");
+        console.log(`The streak is now: ${this.curStreak}`);
     }
 
     setStreak(obtainedPoints) {
@@ -43,7 +45,7 @@ class Streaks {
     }
 
     resetStreak() {
-        this.curStreak = this.CONFIG.MIN_STREAK;
+        this.curStreak = Streaks.CONFIG.MIN_STREAK;
     }
 
     getCurStreak() {

@@ -1,55 +1,61 @@
-<x-guest-layout>
+<x-guest-layout :image_buttonColor="'#39B9EC'">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="w-full max-w-[400px]">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div>
+                <div>
+                    <div class="flex justify-center w-full max-w-[400px] mb-5">
+                        <x-input-error :messages="$errors->get('login')" class="mb-4" />
+                    </div>
+                    <!-- Email Addres -->
+                    <div class="flex justify-center w-full max-w-[400px] mb-2 px-10">
+                        <x-text-input id="email" type="email" placeholder="Email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <br /><x-input-error :messages="$errors->get('email')" class=" mt-2" />
+                    </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+                    <!-- Wachtwoord -->
+                    <div class="flex justify-center w-full max-w-[400px] px-10">
+                        <x-text-input id="password" placeholder="Wachtwoord" type="password" name="password" required autocomplete="current-password" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+                    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+                    <!-- Onthoudt mij -->
+                    <div class="block mt-5 justify-self-center">
+                        <label for="remember_me" class="inline-flex items-center">
+                            <input id="remember_me" type="checkbox" class=" rounded"  name="remember">
+                            <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Onthoud mij') }}</span>
+                        </label>
+                    </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                    <!-- Inloggen knop -->
+                    <div class="flex justify-center w-full max-w-[400px] px-10">
+                        <x-primary-button :image_buttonColor="'#39B9EC'">
+                            {{ __('Inloggen') }}
+                        </x-primary-button>
+                    </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+                    <!-- Deze code hieronder die in comments staat is een knop om naar de pagina wachtwoord vergeten te gaan -->
+                    <!-- <div class="flex items-center justify-end mt-4">
+                        @if (Route::has('password.request'))
+                            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                    </div> -->
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-        </div>
-
-        <div >
-            @if (Route::has('register'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
-                    {{ __('Register?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+                    <!-- Heb je nog geen account knop -->
+                    <div class="flex items-center justify-center mt-4">
+                        @if (Route::has('register'))
+                            <a class=" text-sm text-gray-400 rounded-md" href="{{ route('register') }}">
+                                {!! __('Heb je nog geen account?') . ' <u>' . __('Meld je dan aan!') . '</u>' !!}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>
