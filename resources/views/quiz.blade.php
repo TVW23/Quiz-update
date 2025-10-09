@@ -44,13 +44,17 @@
           @foreach($question->answers as $aIndex => $answer)
             <div>
               @php
-                // 0: top left, 1: top right, 2: bottom left, 3: bottom right
+                // We have 8 answer buttons 
                 $colorClass = '';
                 switch($aIndex) {
-                  case 0: $colorClass = 'bg-[#E72B76] text-white hover:bg-[#b42b76]'; break; // top left
-                  case 1: $colorClass = 'bg-[#CCD626] text-white hover:bg-[#98d626]'; break; // top right
-                  case 2: $colorClass = 'bg-[#39B9EC] text-white hover:bg-[#34a2cf]'; break; // bottom left
-                  case 3: $colorClass = 'bg-[#F2B300] text-white hover:bg-[#d19b00]'; break; // bottom right
+                  case 0: $colorClass = 'bg-[#E72B76] text-white hover:bg-[#b42b76]'; break;
+                  case 1: $colorClass = 'bg-[#CCD626] text-white hover:bg-[#98d626]'; break;
+                  case 2: $colorClass = 'bg-[#39B9EC] text-white hover:bg-[#34a2cf]'; break;
+                  case 3: $colorClass = 'bg-[#F2B300] text-white hover:bg-[#d19b00]'; break;
+                  case 4: $colorClass = 'bg-[#E72B76] text-white hover:bg-[#b42b76]'; break;
+                  case 5: $colorClass = 'bg-[#CCD626] text-white hover:bg-[#98d626]'; break;
+                  case 6: $colorClass = 'bg-[#39B9EC] text-white hover:bg-[#34a2cf]'; break;
+                  case 7: $colorClass = 'bg-[#F2B300] text-white hover:bg-[#d19b00]'; break;
                 }
               @endphp
               <button
