@@ -1,80 +1,103 @@
-    <header class="bg-[#39B9EC] p-4 text-white">
-      <div class="mx-auto flex max-w-6xl items-center justify-between">
+<header class="bg-[#39B9EC] p-4 text-white">
+    <div class="mx-auto flex max-w-6xl items-center justify-between">
+        <!-- Logo -->
         <a href="/overzicht">
-            <img class="w-[50px] h-[50px] rounded-[10%]" src="{{ asset('images/consortium_logo.jpg') }}" alt="Logo" />
+            <img class="w-[50px] h-[50px] rounded-[10%]" 
+                 src="{{ asset('images/consortium_logo.jpg') }}" 
+                 alt="Logo" />
         </a>
+
+        <!-- Navigation Links -->
         <nav class="hidden sm:flex space-x-4">
-          <a href="/" class="hover:underline">Home</a>
-          {{-- <a href="#" class="hover:underline"></a> --}}
-          @if (Auth::check() && Auth::user()->isAdmin())
-            <a href="/admin" class="hover:underline">Admin</a>
-          @endif
+            <a href="/" class="hover:underline">Home</a>
+            @auth
+                @if(Auth::user()->isAdmin())
+                    <a href="/admin" class="hover:underline">Admin</a>
+                @endif
+            @endauth
         </nav>
 
-            <!-- Settings Dropdown -->
-            <div class="sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#32a4d1] hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
+        <!-- Settings Dropdown -->
+        <div class="sm:items-center sm:ms-6">
+            <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#32a4d1] hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
+                        @auth
                             <div>{{ Auth::user()->name }}</div>
+                        @else
+                            <div>Gast</div>
+                        @endauth
+                        <div class="ms-1">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </button>
+                </x-slot>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
+                <x-slot name="content">
+                    <!-- Mobile nav (hidden on lg/md) -->
+                    <div class="flex lg:hidden md:hidden">
+                        <x-dropdown-link href="/">
+                            {{ __('Home') }}
+                        </x-dropdown-link>
+                    </div>
+
+                    <div class="flex lg:hidden md:hidden">
+                        <x-dropdown-link href="#">
+                            {{ __('About') }}
+                        </x-dropdown-link>
+                    </div>
+
+                    <div class="flex lg:hidden md:hidden">
+                        <x-dropdown-link href="#">
+                            {{ __('Contact') }}
+                        </x-dropdown-link>
+                    </div>
+
+                    @auth
+                        @if(Auth::user()->isAdmin())
+                            <div class="flex lg:hidden md:hidden">
+                                <x-dropdown-link href="/admin">
+                                    {{ __('Admin') }}
+                                </x-dropdown-link>
                             </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <!-- <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link> -->
-                        <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
-                              {{ __('Home') }}
-                          </x-dropdown-link>
-                        </div>
-
-                        <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
-                              {{ __('About') }}
-                          </x-dropdown-link>
-                        </div>
-
-                        <div class="flex lg:hidden md:hidden">
-                          <x-dropdown-link href="#">
-                              {{ __('Contact') }}
-                          </x-dropdown-link>
-                        </div>
-
-                        @if (Auth::check() && Auth::user()->isAdmin())
-                          <div class="flex lg:hidden md:hidden">
-                            <x-dropdown-link href="#">
-                                {{ __('Admin') }}
-                            </x-dropdown-link>
-                          </div>
                         @endif
-                        
-                        <x-dropdown-link href="#" 
+                    @endauth
+
+                    @auth
+                        <!-- Account deletion -->
+                        <x-dropdown-link href="#"
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
                             {{ __('Verwijder Account') }}
                         </x-dropdown-link>
 
-                        <!-- Authentication -->
+                        <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-            <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                    @else
+                        <!-- If guest -->
+                        <x-dropdown-link href="{{ route('login') }}">
+                            {{ __('Log in') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link href="{{ route('register') }}">
+                            {{ __('Registreren') }}
+                        </x-dropdown-link>
+                    @endauth
+                </x-slot>
+            </x-dropdown>
+        </div>
+
+        <!-- Delete account modal -->
+        @auth
+            <x-modal name="confirm-user-deletion"
+                     :show="($errors->getBag('userDeletion') ?? collect())->isNotEmpty()"
+                     focusable>
                 <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
                     @csrf
                     @method('delete')
@@ -89,7 +112,6 @@
 
                     <div class="mt-6">
                         <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
                         <x-text-input
                             id="password"
                             name="password"
@@ -97,8 +119,7 @@
                             class="mt-1 block w-3/4"
                             placeholder="{{ __('Wachtwoord') }}"
                         />
-
-                        <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                        <x-input-error :messages="$errors->getBag('userDeletion')->get('password') ?? []" class="mt-2" />
                     </div>
 
                     <div class="mt-6 flex justify-end">
@@ -112,5 +133,6 @@
                     </div>
                 </form>
             </x-modal>
-      </div>
-    </header>
+        @endauth
+    </div>
+</header>
