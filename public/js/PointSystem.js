@@ -22,7 +22,7 @@ class PointSystem {
     DIVISOR: 3,
     MULTIPLIER: 10,
     START_TIME: 0,
-    PERFECT_TIME: 1.5
+    PERFECT_TIME: 2.5
     };
 
     constructor() {
