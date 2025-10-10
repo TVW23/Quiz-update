@@ -33,23 +33,37 @@ class UserQuizPointsController extends Controller
             'points'  => 'required|integer',
         ]);
 
-        $userId = Auth::id(); 
+        $userId = Auth::id();
 
-        $userQuizPoints = UserQuizPoints::updateOrCreate(
-            [
+        // Find existing record
+        $userQuizPoints = UserQuizPoints::where('user_id', $userId)
+            ->where('quiz_id', $request->quiz_id)
+            ->first();
+
+        if ($userQuizPoints) 
+        {
+            // Only update if new points are higher
+            if ($request->points > $userQuizPoints->points) 
+            {
+                $userQuizPoints->update(
+                [
+                    'points' => $request->points,
+                ]);
+            }
+        } else 
+        {
+            // Create new record if none exists
+            $userQuizPoints = UserQuizPoints::create([
                 'user_id' => $userId,
                 'quiz_id' => $request->quiz_id,
-            ],
-            [
-                'points' => $request->points,
-            ]
-        );
+                'points'  => $request->points,
+            ]);
+        }
 
-//        $userQuizPoints->save();
-        
         return response()->json([
             'message' => 'Points saved!',
             'data'    => $userQuizPoints,
         ]);
     }
+
 }
