@@ -93,7 +93,6 @@ function checkAnswer(step) {
         // console.log(`Points added after extra: ${points}`);
         pointSystem.incrementPoints(points);
  
- 
         totalPoints += points;
  
         // Update the points
