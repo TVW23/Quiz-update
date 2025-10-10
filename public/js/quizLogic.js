@@ -77,13 +77,22 @@ function checkAnswer(step) {
  
         feedback.textContent = "Goed gedaan! Dit is het correcte antwoord.";
         feedback.style.color = "green";
- 
+
         pointSystem.stopTimer();
         var elapsedTime = pointSystem.getCurrentTime();
-        var points = pointSystem.getCalculatedCurrentPoints(elapsedTime);
+
+        var pointsToAdd = pointSystem.getCalculatedCurrentPoints(elapsedTime)
+        streaks.setStreak(pointsToAdd);
+
+        // Get +25 points per streak
+        var extraPoints = streaks.getCurStreak() * 25;
+        // console.log("Extra points: " + extraPoints);
+
+        // console.log("Points before extra: " + pointsToAdd);
+        var points = pointsToAdd + extraPoints;
+        // console.log(`Points added after extra: ${points}`);
         pointSystem.incrementPoints(points);
  
-        streaks.setStreak(points);
  
         totalPoints += points;
  
